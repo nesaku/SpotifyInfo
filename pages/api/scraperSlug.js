@@ -32,7 +32,7 @@ const scraperSlug = async (req, res) => {
         .attr("content")
         .replace(
           "https://p.scdn.co/mp3-preview/",
-          "http://localhost:3000/proxy/"
+          `${process.env.NEXT_PUBLIC_HOST_URL}/proxy/`
         );
       const lastScraped = new Date().toISOString();
       res.statusCode = 200;
