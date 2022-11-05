@@ -9,10 +9,6 @@ const SlugTrackQuery = ({ path }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isQuery, setIsQuery] = useState(true);
 
-  {
-    /* When the button is clicked/submitted send a fetch request to the scraper API*/
-  }
-
   const handleClick = async () => {
     setIsLoading(true);
 

@@ -23,8 +23,7 @@ const spotify = async (req, res) => {
       const title = $('meta[property="og:title"]').attr("content");
       const artist = $('meta[property="og:description"]')
         .attr("content")
-        .replace("Song · ", "")
-        .replace(" ", "");
+        .replace("Song · ", "");
       const url = $('meta[property="og:url"]').attr("content");
       const uri = $('meta[name="al:android:url"]').attr("content");
       const trackID = $('meta[name="al:android:url"]')
