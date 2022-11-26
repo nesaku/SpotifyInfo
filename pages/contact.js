@@ -8,7 +8,7 @@ import Meta from "../components/Meta";
 const contact = () => {
   return (
     <div className="bg-gradient-to-tr from-green-50 to-green-100 dark:bg-gradientpage h-full">
-      <Meta title="- Contact" />
+      <Meta title="Contact" />
       <Header />
       {/* Title */}
       <ContactHero />
