@@ -79,7 +79,7 @@ const FAQ = () => {
               of any Spotify track page URL with spotifyinfo.netlify.app. Then
               click the{" "}
               <code>
-                <span className="bg-slate-900 px-2 py-1 rounded-lg">
+                <span className="bg-gray-300 dark:bg-slate-900 px-2 py-1 rounded-lg">
                   Fetch Data
                 </span>
               </code>{" "}
@@ -99,7 +99,7 @@ const FAQ = () => {
               of any Spotify track page URL with spotifyinfo.netlify.app. Then
               click the{" "}
               <code>
-                <span className="bg-slate-900  px-2 py-1 rounded-lg">
+                <span className="bg-gray-300 dark:bg-slate-900 px-2 py-1 rounded-lg">
                   Fetch Data
                 </span>
               </code>{" "}

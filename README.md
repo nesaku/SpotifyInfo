@@ -13,7 +13,7 @@ SpotifyInfo - Get Info On A Spotify Track
 
 - No ads - Simple. We don't show ads.
 - No tracking or data collection - No personal information is ever collected. Tracking cookies are not used.
-- No sign up required - Use SpotifyInfo without signing up for an account and never deal with those anoying sign up popups.
+- No sign up required - Use SpotifyInfo without signing up for an account and never deal with those annoying sign up popups.
 - All requests are proxied - your requests are never directly made to Spotify
 - Lightweight
 - Modern Design - Responsive design with built-in light & dark mode support
