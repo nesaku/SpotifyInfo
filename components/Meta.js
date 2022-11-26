@@ -1,11 +1,12 @@
 import React from "react";
 import Head from "next/head";
 
-const Meta = () => {
+const Meta = (props) => {
+  const title = `SpotifyInfo ${props.title ? `- ${props.title}` : ""}`;
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>SpotifyInfo</title>
+      <title>{title}</title>
       <meta
         name="description"
         content="SpotifyInfo - Get Info On A Spotify Track"

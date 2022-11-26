@@ -24,25 +24,13 @@ const Footer = () => {
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/about`}
-                  target="_self"
-                  rel="noreferrer"
-                >
-                  About
-                </a>
-              </li>
-
-              <li>
-                <a
-                  className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/about#faq`}
+                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/#faq`}
                   target="_self"
                   rel="noreferrer"
                 >
                   FAQ
                 </a>
               </li>
-
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
@@ -53,7 +41,6 @@ const Footer = () => {
                   Contact
                 </a>
               </li>
-
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
@@ -64,7 +51,6 @@ const Footer = () => {
                   Privacy
                 </a>
               </li>
-
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
@@ -75,7 +61,6 @@ const Footer = () => {
                   Go To The Top
                 </a>
               </li>
-
               <li className="items-center justify-center align-middle content-center">
                 <a
                   className="text-gray-900 hover:text-gray-900/75 dark:text-gray-300 dark:hover:text-gray-300/75"

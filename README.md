@@ -27,7 +27,8 @@ SpotifyInfo - Get Info On A Spotify Track
 There are two ways you can use SpotifyInfo:
 
 1. Visit [spotifyinfo.netlify.app](spotifyinfo.netlify.app) and paste the Spotify track url into the input box.
-2. Replace the `https://open.spotify.com` of any url with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
+2. Replace `https://open.spotify.com` of any url with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
+3. Append `https://open.spotify.com` of any url with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
 
 ### How Does This Work? - Scraping
 

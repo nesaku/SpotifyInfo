@@ -1,19 +1,14 @@
 const cheerio = require("cheerio");
 
-const spotify = async (req, res) => {
+const scraperPath = async (req, res) => {
   if (req.method === "POST") {
-    const scrapeURL = req.body.queryURL.split("?")[0];
-
+    const scrapeURL = req.body.queryURL
+      .replace("https:,", "https://")
+      .replaceAll(",", "/");
     try {
-      {
-        /*const response = await fetch(`${scrapeURL}`);*/
-      }
-      const response = await fetch(`${scrapeURL}`, {
+      const response = await fetch(scrapeURL, {
         method: "GET",
         headers: new Headers({
-          /* 
-        "User-Agent"   : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
-        */
           "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT,
         }),
       });
@@ -56,10 +51,10 @@ const spotify = async (req, res) => {
       res.statusCode = 404;
       return res.json({
         scrapeURL: scrapeURL,
-        error: `${scrapeURL} Not Found. An Example Of A Valid Query Is: https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn`,
+        error: `https://open.spotify.com/track/${scrapeURL} - Not Found. An Example Of A Valid Query Is: https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn`,
       });
     }
   }
 };
 
-export default spotify;
+export default scraperPath;

@@ -4,7 +4,7 @@ import Loader from "./Loader";
 import Header from "./Header";
 import Footer from "./Footer";
 
-const SlugQuery = ({ path }) => {
+const PathQuery = ({ path }) => {
   const [scrapedData, setscrapedData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isQuery, setIsQuery] = useState(true);
@@ -12,8 +12,8 @@ const SlugQuery = ({ path }) => {
   const handleClick = async () => {
     setIsLoading(true);
 
-    /* Send the fetch request to scraperSlug API */
-    fetch("/api/scraperSlug", {
+    /* Send the fetch request to scraperPath API */
+    fetch("/api/scraperPath", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -48,7 +48,9 @@ const SlugQuery = ({ path }) => {
             </h2>
           </div>
           <div className="flex flex-col items-center justify-center text-center">
-            <code className="text-xs md:text-lg w-80 sm:w-full truncate">{`https://open.spotify.com/track/${path}`}</code>
+            <code className="text-xs md:text-lg w-80 sm:w-full truncate">{`${path
+              .replace("https:,", "https://")
+              .replaceAll(",", "/")}`}</code>
             <br />
             <button
               onClick={handleClick}
@@ -73,4 +75,4 @@ const SlugQuery = ({ path }) => {
   );
 };
 
-export default SlugQuery;
+export default PathQuery;

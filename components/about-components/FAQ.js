@@ -53,7 +53,8 @@ const FAQ = () => {
               <span className="underline">
                 There are two ways you can use SpotifyInfo:
               </span>
-              <br />- Visit{" "}
+              <br />
+              1. Visit{" "}
               <a
                 className="underline text-green-600 dark:text-green-500/80"
                 href="https://spotifyinfo.netlify.app"
@@ -65,7 +66,8 @@ const FAQ = () => {
               and paste the Spotify track URL into the input box.
               <br />
               <b>OR</b>
-              <br />- Replace the{" "}
+              <br />
+              2. Replace{" "}
               <a
                 className="underline text-green-600 dark:text-green-500/80"
                 href="https://open.spotify.com"
@@ -74,9 +76,34 @@ const FAQ = () => {
               >
                 https://open.spotify.com
               </a>{" "}
-              of any Spotify track page with spotifyinfo.netlify.app. Then click
-              the
-              <code> &quot;Fetch Data&quot;</code> button.
+              of any Spotify track page URL with spotifyinfo.netlify.app. Then
+              click the{" "}
+              <code>
+                <span className="bg-slate-900 px-2 py-1 rounded-lg">
+                  Fetch Data
+                </span>
+              </code>{" "}
+              button.
+              <br />
+              <b>OR</b>
+              <br />
+              3. Append{" "}
+              <a
+                className="underline text-green-600 dark:text-green-500/80"
+                href="https://open.spotify.com"
+                target="_blank"
+                rel="noreferrer"
+              >
+                https://open.spotify.com
+              </a>{" "}
+              of any Spotify track page URL with spotifyinfo.netlify.app. Then
+              click the{" "}
+              <code>
+                <span className="bg-slate-900  px-2 py-1 rounded-lg">
+                  Fetch Data
+                </span>
+              </code>{" "}
+              button.
             </p>
           </details>
           <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">

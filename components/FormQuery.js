@@ -2,6 +2,9 @@ import { useState } from "react";
 import ResultData from "./ResultData";
 import Loader from "./Loader";
 import Footer from "./Footer";
+import Divider from "./about-components/Divider";
+import Features from "./about-components/Features";
+import FAQ from "./about-components/FAQ";
 
 const FormQuery = () => {
   const [inputValue, setInputValue] = useState("");
@@ -35,16 +38,14 @@ const FormQuery = () => {
         {/* Once query results are loaded, don't show the title text*/}
         <div
           className={
-            isQuery
-              ? "flex flex-col text-center p-10 mt-20 md:mt-30 lg:mt-30 xl:mt-40 2xl:mt-64 mb-40 sm:mb-40 md:mb-80 xl:mb-80 2xl:mb-96 w-full"
-              : "hidden"
+            isQuery ? "flex flex-col text-center p-20 mb-20" : "hidden"
           }
         >
-          <div className={isQuery ? "visible" : "hidden"}>
-            <h1 className="font-extrabold text-transparent text-6xl sm:text-8xl bg-clip-text bg-gradient-to-br from-green-400 to-green-600">
+          <div className={isQuery ? "visible pt-10 sm:pt-20 pb-10" : "hidden"}>
+            <h1 className="font-extrabold text-transparent text-6xl sm:text-8xl bg-clip-text bg-gradient-to-br from-green-400 to-green-600 p-2">
               <a href={process.env.NEXT_PUBLIC_HOST_URL}>SpotifyInfo</a>
             </h1>
-            <h2 className="my-10 text-4xl text-transparent font-bold text-black dark:text-gray-200">
+            <h2 className="mt-10 text-4xl text-transparent font-bold text-black dark:text-gray-200">
               Get Info About A Spotify Track:
             </h2>
           </div>
@@ -78,7 +79,13 @@ const FormQuery = () => {
           <ResultData scrapedData={scrapedData} />
         </section>
       </main>
-      <div className={isLoading ? "hidden" : "flex"}>
+      <div className={isLoading ? "hidden" : "visible"}>
+        <div className={isQuery ? "visible" : "hidden"}>
+          <Divider />
+          <Features />
+          <Divider />
+          <FAQ />
+        </div>
         <Footer />
       </div>
     </div>

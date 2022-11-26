@@ -24,7 +24,7 @@ const ContactForm = () => {
           </div>
           <div>
             <label
-              for="email"
+              name="email"
               className="block mb-2 text-md font-medium text-gray-900 text-center dark:text-gray-300"
             >
               Your email
@@ -38,7 +38,7 @@ const ContactForm = () => {
           </div>
           <div>
             <label
-              for="subject"
+              name="subject"
               className="block mb-2 text-md font-medium text-gray-900 text-center dark:text-gray-300"
             >
               Subject
@@ -51,7 +51,7 @@ const ContactForm = () => {
           </div>
           <div className="sm:col-span-2">
             <label
-              for="message"
+              name="message"
               className="block mb-2 text-md font-medium text-gray-900 text-center dark:text-gray-300"
             >
               Your message

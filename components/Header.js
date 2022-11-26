@@ -31,16 +31,7 @@ const Header = () => {
           <li className="flex">
             <a
               rel="noopener noreferrer"
-              href={`${process.env.NEXT_PUBLIC_HOST_URL}/about`}
-              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
-            >
-              About
-            </a>
-          </li>
-          <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href={`${process.env.NEXT_PUBLIC_HOST_URL}/about#faq`}
+              href={`${process.env.NEXT_PUBLIC_HOST_URL}/#faq`}
               className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
             >
               FAQ

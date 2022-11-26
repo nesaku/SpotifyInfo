@@ -9,10 +9,6 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/proxy/",
-        destination: "https://p.scdn.co/mp3-preview/",
-      },
-      {
         source: "/proxy/:path*",
         destination: "https://p.scdn.co/mp3-preview/:path*",
       },

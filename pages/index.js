@@ -8,7 +8,6 @@ const Home = () => {
     <div className="bg-gradient-to-tr from-green-50 to-green-100 dark:bg-gradienthero min-h-screen flex flex-col">
       <Meta />
       <Header />
-      {/* HomePage (Form Query Page) */}
       <FormQuery />
     </div>
   );
