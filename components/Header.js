@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Header = () => {
@@ -6,8 +7,11 @@ const Header = () => {
     <header className="p-4 dark:bg-green-700 dark:text-green-100 border-b-2 dark:border-b-0 border-green-300">
       <div className="container flex justify-between items-center h-16 mx-auto">
         <a
-          rel="noopener noreferrer"
-          href={process.env.NEXT_PUBLIC_HOST_URL}
+          href={
+            process.env.NEXT_PUBLIC_HOST_URL
+              ? process.env.NEXT_PUBLIC_HOST_URL
+              : "http://localhost:3000"
+          }
           aria-label="Back to homepage"
           className="flex items-center mx-auto lg:mx-32"
         >
@@ -21,39 +25,55 @@ const Header = () => {
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
             <a
-              rel="noopener noreferrer"
-              href={process.env.NEXT_PUBLIC_HOST_URL}
+              href={
+                process.env.NEXT_PUBLIC_HOST_URL
+                  ? process.env.NEXT_PUBLIC_HOST_URL
+                  : "http://localhost:3000"
+              }
               className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
             >
               Home
             </a>
           </li>
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href={`${process.env.NEXT_PUBLIC_HOST_URL}/#faq`}
-              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            <Link
+              href={`${
+                process.env.NEXT_PUBLIC_HOST_URL
+                  ? process.env.NEXT_PUBLIC_HOST_URL
+                  : "http://localhost:3000"
+              }/#faq`}
             >
-              FAQ
-            </a>
+              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
+                FAQ
+              </a>
+            </Link>
           </li>
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href={`${process.env.NEXT_PUBLIC_HOST_URL}/contact`}
-              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            <Link
+              href={`${
+                process.env.NEXT_PUBLIC_HOST_URL
+                  ? process.env.NEXT_PUBLIC_HOST_URL
+                  : "http://localhost:3000"
+              }/contact`}
             >
-              Contact
-            </a>
+              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
+                Contact
+              </a>
+            </Link>
           </li>
+
           <li className="flex">
-            <a
-              rel="noopener noreferrer"
-              href={`${process.env.NEXT_PUBLIC_HOST_URL}/privacy`}
-              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            <Link
+              href={`${
+                process.env.NEXT_PUBLIC_HOST_URL
+                  ? process.env.NEXT_PUBLIC_HOST_URL
+                  : "http://localhost:3000"
+              }/privacy`}
             >
-              Privacy
-            </a>
+              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
+                Privacy
+              </a>
+            </Link>
           </li>
           <li className="flex">
             <a
@@ -77,42 +97,25 @@ const Header = () => {
               </svg>
             </a>
           </li>
-          {/*
-          <li className="flex">
+          <li className="flex items-center justify-center align-middle content-center">
             <a
-              rel="noopener noreferrer"
-              href={process.env.NEXT_PUBLIC_HOST_URL}
-              className="flex items-center px-4 -mb-1 border-b-2 dark:border-transparent"
+              className=" mt-0.5 text-gray-900 hover:text-gray-900/75 dark:text-gray-100/80 dark:hover:text-white/90 duration-300 delay-150 hover:delay-50 transition"
+              href="https://codeberg.org/nesaku/SpotifyInfo"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Codeberg"
             >
-              Link
+              <svg
+                className="h-7 w-7"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M11.955.49A12 12 0 0 0 0 12.49a12 12 0 0 0 1.832 6.373L11.838 5.928a.187.14 0 0 1 .324 0l10.006 12.935A12 12 0 0 0 24 12.49a12 12 0 0 0-12-12 12 12 0 0 0-.045 0zm.375 6.467 4.416 16.553a12 12 0 0 0 5.137-4.213z" />
+              </svg>
             </a>
           </li>
-          */}
         </ul>
-        {/*
-        <div className="items-center flex-shrink-0 hidden lg:flex">
-          <button className="self-center px-8 py-3 rounded">Sign in</button>
-          <button className="self-center px-8 py-3 font-semibold rounded dark:bg-green-400 dark:text-green-900">
-            Sign up
-          </button>
-        </div>
-        <button className="p-4 lg:hidden">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            className="w-6 h-6 dark:text-green-100"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 6h16M4 12h16M4 18h16"
-            ></path>
-          </svg>
-        </button>
-        */}
       </div>
     </header>
   );

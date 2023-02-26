@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -13,50 +14,59 @@ const Footer = () => {
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/`}
-                  target="_self"
-                  rel="noreferrer"
+                  href={`${
+                    process.env.NEXT_PUBLIC_HOST_URL
+                      ? process.env.NEXT_PUBLIC_HOST_URL
+                      : "http://localhost:3000"
+                  }/`}
                 >
                   Home
                 </a>
               </li>
 
               <li>
-                <a
-                  className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/#faq`}
-                  target="_self"
-                  rel="noreferrer"
+                <Link
+                  href={`${
+                    process.env.NEXT_PUBLIC_HOST_URL
+                      ? process.env.NEXT_PUBLIC_HOST_URL
+                      : "http://localhost:3000"
+                  }/#faq`}
                 >
-                  FAQ
-                </a>
+                  <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
+                    FAQ
+                  </a>
+                </Link>
               </li>
               <li>
-                <a
-                  className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/contact`}
-                  target="_self"
-                  rel="noreferrer"
+                <Link
+                  href={`${
+                    process.env.NEXT_PUBLIC_HOST_URL
+                      ? process.env.NEXT_PUBLIC_HOST_URL
+                      : "http://localhost:3000"
+                  }/contact`}
                 >
-                  Contact
-                </a>
+                  <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
+                    Contact
+                  </a>
+                </Link>
               </li>
               <li>
-                <a
-                  className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${process.env.NEXT_PUBLIC_HOST_URL}/privacy`}
-                  target="_self"
-                  rel="noreferrer"
+                <Link
+                  href={`${
+                    process.env.NEXT_PUBLIC_HOST_URL
+                      ? process.env.NEXT_PUBLIC_HOST_URL
+                      : "http://localhost:3000"
+                  }/privacy`}
                 >
-                  Privacy
-                </a>
+                  <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
+                    Privacy
+                  </a>
+                </Link>
               </li>
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
                   href="#"
-                  target="_self"
-                  rel="noreferrer"
                 >
                   Go To The Top
                 </a>
@@ -83,17 +93,26 @@ const Footer = () => {
                   </svg>
                 </a>
               </li>
+              <li className="flex items-center justify-center align-middle content-center">
+                <a
+                  className=" mt-0.5 text-gray-900 hover:text-gray-900/75 dark:text-gray-100/80 dark:hover:text-white/90 duration-300 delay-150 hover:delay-50 transition"
+                  href="https://codeberg.org/nesaku/SpotifyInfo"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Codeberg"
+                >
+                  <svg
+                    className="h-7 w-7"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d="M11.955.49A12 12 0 0 0 0 12.49a12 12 0 0 0 1.832 6.373L11.838 5.928a.187.14 0 0 1 .324 0l10.006 12.935A12 12 0 0 0 24 12.49a12 12 0 0 0-12-12 12 12 0 0 0-.045 0zm.375 6.467 4.416 16.553a12 12 0 0 0 5.137-4.213z" />
+                  </svg>
+                </a>
+              </li>
             </ul>
           </nav>
-          {/* 
-          <p className="mx-auto max-w-lg text-xs text-gray-500 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum,
-            natus tempore illo laborum nam, modi quam sequi amet quo quasi
-            impedit iure eum similique pariatur alias exercitationem, porro
-            perspiciatis esse. Corporis odit consequatur sint sequi.
-            <span className="mt-4 block"> &copy; 2022 SpotifyInfo </span>
-          </p>
-          */}
         </div>
       </div>
     </footer>

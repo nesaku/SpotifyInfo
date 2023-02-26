@@ -62,6 +62,7 @@ const FormQuery = () => {
                   onChange={(e) => setInputValue(e.target.value)}
                   disabled={isLoading}
                   type="url"
+                  placeholder="https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn"
                   required
                 />
               </label>

@@ -14,7 +14,9 @@ const spotify = async (req, res) => {
           /* 
         "User-Agent"   : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
         */
-          "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT,
+          "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT
+            ? process.env.NEXT_PUBLIC_USER_AGENT
+            : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
         }),
       });
       const htmlString = await response.text();
@@ -35,7 +37,11 @@ const spotify = async (req, res) => {
         .attr("content")
         .replace(
           "https://p.scdn.co/mp3-preview/",
-          `${process.env.NEXT_PUBLIC_HOST_URL}/proxy/`
+          `${
+            process.env.NEXT_PUBLIC_HOST_URL
+              ? process.env.NEXT_PUBLIC_HOST_URL
+              : "http://localhost:3000"
+          }/proxy/`
         )
         .split("?")[0];
       const lastScraped = new Date().toISOString();

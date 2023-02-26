@@ -17,7 +17,7 @@ const ResultData = ({ scrapedData }) => {
       {!scrapedData.title && (
         <div className="flex flex-col justify-center max-w-2xl text-center mx-auto h-[74vh]">
           <h1 id="error" className="text-red-600 font-bold text-5xl uppercase">
-            Error - Book Not Found
+            Error - Track Not Found
           </h1>
           <h2 className="my-12 text-lg text-black font-bold dark:text-gray-100">
             An Example Of A Valid Query Is:
