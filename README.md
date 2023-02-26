@@ -1,6 +1,13 @@
-# SpotifyInfo
+<div align="center">
+<img src="./public/android-chrome-192x192.png?raw=true" width="192" height="192" alt="">
+</div>
+<h1 align="center">SpotifyInfo</h1>
+<div align="center">
 
 SpotifyInfo - Get Info On A Spotify Track
+  
+[GitHub](https://github.com/nesaku/SpotifyInfo) | [Codeberg](https://codeberg.org/nesaku/SpotifyInfo)
+</div>
 
 ## Screenshots
 
@@ -17,7 +24,16 @@ SpotifyInfo - Get Info On A Spotify Track
 - All requests are proxied - your requests are never directly made to Spotify
 - Lightweight
 - Modern Design - Responsive design with built-in light & dark mode support
+  
+---
 
+## Instances
+
+| Instance URL                                                                                                                                                    |        Country         | Provider   | Notes                                           |
+| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------: | ---------- | ----------------------------------------------- |
+| [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app)                                                                                                                        |          :us:          | Netlify     | Run by [me](https://github.com/nesaku)          |
+| [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)                                                                                                                        | :us: | Vercel | Run by [me](https://github.com/nesaku)          |
+  
 ---
 
 ## FAQ
