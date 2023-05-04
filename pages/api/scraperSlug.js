@@ -29,7 +29,7 @@ const scraperSlug = async (req, res) => {
         .replace("spotify://", "");
       const releaseDate = $('meta[name="music:release_date"]').attr("content");
       const duration = $('meta[name="music:duration"]').attr("content");
-      const previewURL = $('meta[name="music:preview_url:secure_url"]')
+      const previewURL = $('meta[property="og:audio"]')
         .attr("content")
         .replace(
           "https://p.scdn.co/mp3-preview/",

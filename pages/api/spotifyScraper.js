@@ -22,6 +22,7 @@ const spotify = async (req, res) => {
       const htmlString = await response.text();
       const $ = cheerio.load(htmlString);
       const cover = $('meta[property="og:image"]').attr("content");
+
       const title = $('meta[property="og:title"]').attr("content");
       const artist = $('meta[property="og:description"]')
         .attr("content")
@@ -33,7 +34,7 @@ const spotify = async (req, res) => {
         .replace("spotify://", "");
       const releaseDate = $('meta[name="music:release_date"]').attr("content");
       const duration = $('meta[name="music:duration"]').attr("content");
-      const previewURL = $('meta[name="music:preview_url:secure_url"]')
+      const previewURL = $('meta[property="og:audio"]')
         .attr("content")
         .replace(
           "https://p.scdn.co/mp3-preview/",
