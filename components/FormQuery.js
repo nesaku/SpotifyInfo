@@ -34,7 +34,9 @@ const FormQuery = () => {
     <div className={isQuery ? "bg-transparent" : "dark:bg-gradientpage"}>
       {/* Show the loader when the page is loading*/}
       {isLoading && <Loader />}
-      <main className={isLoading ? "hidden" : "flex justify-center"}>
+      <main
+        className={isLoading ? "hidden" : "flex justify-center overflow-hidden"}
+      >
         {/* Once query results are loaded, don't show the title text*/}
         <div
           className={
