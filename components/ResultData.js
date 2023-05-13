@@ -49,24 +49,31 @@ const ResultData = ({ scrapedData }) => {
             <div className="mt-10 mx-auto p-4 background-image: url(/cover-placeholder.svg)">
               <h1 className="hidden">Cover:</h1>
               {/* Load WebP Image With JPG Fallback & 404 Not Found Image*/}
-              <picture>
-                <source
-                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
-                  type="image/webp"
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                />
-                <source
-                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                  type="image/jpeg"
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                />
-                <img
-                  src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                  alt={scrapedData.coverAltText}
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                  loading="eager"
-                />
-              </picture>
+              <a
+                href={scrapedData.cover}
+                rel="noreferrer noopener"
+                target="_blank"
+                alt={`${scrapedData.title} cover art`}
+              >
+                <picture>
+                  <source
+                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
+                    type="image/webp"
+                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
+                  />
+                  <source
+                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    type="image/jpeg"
+                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
+                  />
+                  <img
+                    src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    alt={scrapedData.coverAltText}
+                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-all duration-600 ease-in-out hover:scale-105"
+                    loading="eager"
+                  />
+                </picture>
+              </a>
             </div>
           </div>
           <div id="divider" className="p-0 lg:p-2"></div>
