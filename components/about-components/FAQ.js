@@ -63,7 +63,7 @@ const FAQ = () => {
               >
                 spotifyinfo.netlify.app
               </a>{" "}
-              and paste the Spotify track URL into the input box.
+              and paste the Spotify track URL/URI into the input box.
               <br />
               <b>OR</b>
               <br />

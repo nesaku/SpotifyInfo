@@ -20,7 +20,14 @@ const FormQuery = () => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ queryURL: inputValue }),
+      body: JSON.stringify({
+        queryURL: inputValue.includes("spotify:track:")
+          ? inputValue.replace(
+              "spotify:track:",
+              "https://open.spotify.com/track/"
+            )
+          : inputValue,
+      }),
     })
       .then((res) => res.json())
       .then((userData) => {
@@ -29,6 +36,8 @@ const FormQuery = () => {
         setIsQuery(false);
       });
   };
+
+  console.log(inputValue);
 
   return (
     <div className={isQuery ? "bg-transparent" : "dark:bg-gradientpage"}>
@@ -56,7 +65,7 @@ const FormQuery = () => {
             <div className="flex flex-col items-center justify-center text-center">
               <label className="flex flex-col">
                 <h3 className="text-2xl text-black dark:text-gray-200 font-semibold mb-10">
-                  Enter A Spotify Track URL: &nbsp;
+                  Enter A Spotify Track URL/URI: &nbsp;
                 </h3>
                 <input
                   className="rounded-md mx-10 py-3 px-5 text-left text-black text-sm  bg-slate-200 border-4 border-green-600 focus:outline-none focus:ring-4 focus:ring-green-300"

@@ -106,11 +106,25 @@ const ResultData = ({ scrapedData }) => {
         */}
             <h2 className="font-bold text-2xl my-6 underline">Spotify URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
-              <a href={`${scrapedData.url}`}>{scrapedData.url}</a>
+              <a target="_blank" rel="noreferrer" href={`${scrapedData.url}`}>
+                {scrapedData.url}
+              </a>
+            </span>
+            <h2 className="font-bold text-2xl my-6 underline">
+              Spotify App URL:
+            </h2>
+            <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={` spotify://${scrapedData.trackID}`}
+              >
+                spotify://{scrapedData.trackID}
+              </a>
             </span>
             <h2 className="font-bold text-2xl my-6 underline">Spotify URI:</h2>
             <span className="max-w-lg text-md">
-              spotify://{scrapedData.trackID}
+              spotify:{scrapedData.trackID.replace("track/", "track:")}
             </span>
             <h2 className="font-bold text-2xl my-6 underline">
               Last Scraped:{" "}

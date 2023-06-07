@@ -5,8 +5,9 @@
 <div align="center">
 
 SpotifyInfo - Get Info On A Spotify Track
-  
+
 [GitHub](https://github.com/nesaku/SpotifyInfo) | [Codeberg](https://codeberg.org/nesaku/SpotifyInfo)
+
 </div>
 
 ## Screenshots
@@ -24,17 +25,17 @@ SpotifyInfo - Get Info On A Spotify Track
 - All requests are proxied - your requests are never directly made to Spotify
 - Lightweight
 - Modern Design - Responsive design with built-in light & dark mode support
-  
+
 ---
 
 ## Instances
 
-| Instance URL                                                                                                                                                    |        Country         | Provider   | Notes                                           |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------: | ---------- | ----------------------------------------------- |
-| [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app)                                                                                                                        |          :us:          | Netlify     | Run by [me](https://github.com/nesaku)          |
-| [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)                                                                                                                        | :us: | Vercel | Run by [me](https://github.com/nesaku)          |
-  | [listen-spotify.whateveritworks.org](https://listen-spotify.whateveritworks.org)                                                                                                                     | :de: | Hetzner (Cloudflare) | Run by [WhateverItWorks](https://github.com/WhateverItWorks)          |
-  
+| Instance URL                                                                     | Country | Provider             | Notes                                                        |
+| -------------------------------------------------------------------------------- | :-----: | -------------------- | ------------------------------------------------------------ |
+| [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app)                       |  :us:   | Netlify              | Run by [me](https://github.com/nesaku)                       |
+| [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)                         |  :us:   | Vercel               | Run by [me](https://github.com/nesaku)                       |
+| [listen-spotify.whateveritworks.org](https://listen-spotify.whateveritworks.org) |  :de:   | Hetzner (Cloudflare) | Run by [WhateverItWorks](https://github.com/WhateverItWorks) |
+
 ---
 
 ## FAQ
@@ -43,9 +44,9 @@ SpotifyInfo - Get Info On A Spotify Track
 
 There are two ways you can use SpotifyInfo:
 
-1. Visit [spotifyinfo.netlify.app](spotifyinfo.netlify.app) and paste the Spotify track url into the input box.
-2. Replace `https://open.spotify.com` of any url with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
-3. Append `https://open.spotify.com` of any url with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
+1. Visit [spotifyinfo.netlify.app](spotifyinfo.netlify.app) and paste the Spotify track URL/URI into the input box.
+2. Replace `https://open.spotify.com` of any URL/URI with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
+3. Append `https://open.spotify.com` of any URL/URI with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
 
 ### How Does This Work? - Scraping
 
