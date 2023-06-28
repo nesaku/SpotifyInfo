@@ -8,7 +8,7 @@ import FAQ from "./about-components/FAQ";
 
 const FormQuery = () => {
   const [inputValue, setInputValue] = useState("");
-  const [scrapedData, setscrapedData] = useState({});
+  const [scrapedData, setScrapedData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isQuery, setIsQuery] = useState(true);
 
@@ -31,13 +31,11 @@ const FormQuery = () => {
     })
       .then((res) => res.json())
       .then((userData) => {
-        setscrapedData(userData);
+        setScrapedData(userData);
         setIsLoading(false);
         setIsQuery(false);
       });
   };
-
-  console.log(inputValue);
 
   return (
     <div className={isQuery ? "bg-transparent" : "dark:bg-gradientpage"}>

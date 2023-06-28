@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
+  console.log(`%cVersion: 1.8.0`, `color:green`);
   return (
     <footer aria-label="Site Footer" className="text-center w-full mt-auto">
       <div className="flex justify-center items-center content-center  mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
@@ -14,50 +15,28 @@ const Footer = () => {
               <li>
                 <a
                   className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75"
-                  href={`${
-                    process.env.NEXT_PUBLIC_HOST_URL
-                      ? process.env.NEXT_PUBLIC_HOST_URL
-                      : "http://localhost:3000"
-                  }/`}
+                  href={`/`}
                 >
                   Home
                 </a>
               </li>
 
               <li>
-                <Link
-                  href={`${
-                    process.env.NEXT_PUBLIC_HOST_URL
-                      ? process.env.NEXT_PUBLIC_HOST_URL
-                      : "http://localhost:3000"
-                  }/#faq`}
-                >
+                <Link href={`/#faq`}>
                   <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
                     FAQ
                   </a>
                 </Link>
               </li>
               <li>
-                <Link
-                  href={`${
-                    process.env.NEXT_PUBLIC_HOST_URL
-                      ? process.env.NEXT_PUBLIC_HOST_URL
-                      : "http://localhost:3000"
-                  }/contact`}
-                >
+                <Link href={`/contact`}>
                   <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
                     Contact
                   </a>
                 </Link>
               </li>
               <li>
-                <Link
-                  href={`${
-                    process.env.NEXT_PUBLIC_HOST_URL
-                      ? process.env.NEXT_PUBLIC_HOST_URL
-                      : "http://localhost:3000"
-                  }/privacy`}
-                >
+                <Link href={`/privacy`}>
                   <a className="text-gray-900 transition hover:text-gray-900/75 dark:text-white dark:hover:text-white/75">
                     Privacy
                   </a>

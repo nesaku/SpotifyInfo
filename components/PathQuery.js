@@ -5,7 +5,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 const PathQuery = ({ path }) => {
-  const [scrapedData, setscrapedData] = useState({});
+  const [scrapedData, setScrapedData] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isQuery, setIsQuery] = useState(true);
 
@@ -22,7 +22,7 @@ const PathQuery = ({ path }) => {
     })
       .then((res) => res.json())
       .then((userData) => {
-        setscrapedData(userData);
+        setScrapedData(userData);
         setIsLoading(false);
         setIsQuery(false);
       });

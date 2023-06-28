@@ -7,11 +7,7 @@ const Header = () => {
     <header className="p-4 dark:bg-green-700 dark:text-green-100 border-b-2 dark:border-b-0 border-green-300">
       <div className="container flex justify-between items-center h-16 mx-auto">
         <a
-          href={
-            process.env.NEXT_PUBLIC_HOST_URL
-              ? process.env.NEXT_PUBLIC_HOST_URL
-              : "http://localhost:3000"
-          }
+          href={"/"}
           aria-label="Back to homepage"
           className="flex items-center mx-auto lg:mx-32"
         >
@@ -25,37 +21,21 @@ const Header = () => {
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
             <a
-              href={
-                process.env.NEXT_PUBLIC_HOST_URL
-                  ? process.env.NEXT_PUBLIC_HOST_URL
-                  : "http://localhost:3000"
-              }
+              href={"/"}
               className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
             >
               Home
             </a>
           </li>
           <li className="flex">
-            <Link
-              href={`${
-                process.env.NEXT_PUBLIC_HOST_URL
-                  ? process.env.NEXT_PUBLIC_HOST_URL
-                  : "http://localhost:3000"
-              }/#faq`}
-            >
+            <Link href={`/#faq`}>
               <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
                 FAQ
               </a>
             </Link>
           </li>
           <li className="flex">
-            <Link
-              href={`${
-                process.env.NEXT_PUBLIC_HOST_URL
-                  ? process.env.NEXT_PUBLIC_HOST_URL
-                  : "http://localhost:3000"
-              }/contact`}
-            >
+            <Link href={`/contact`}>
               <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
                 Contact
               </a>
@@ -63,13 +43,7 @@ const Header = () => {
           </li>
 
           <li className="flex">
-            <Link
-              href={`${
-                process.env.NEXT_PUBLIC_HOST_URL
-                  ? process.env.NEXT_PUBLIC_HOST_URL
-                  : "http://localhost:3000"
-              }/privacy`}
-            >
+            <Link href={`/privacy`}>
               <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
                 Privacy
               </a>

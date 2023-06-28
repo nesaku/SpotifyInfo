@@ -30,14 +30,7 @@ const scraperPath = async (req, res) => {
       const duration = $('meta[name="music:duration"]').attr("content");
       const previewURL = $('meta[property="og:audio"]')
         .attr("content")
-        .replace(
-          "https://p.scdn.co/mp3-preview/",
-          `${
-            process.env.NEXT_PUBLIC_HOST_URL
-              ? process.env.NEXT_PUBLIC_HOST_URL
-              : "http://localhost:3000"
-          }/proxy/`
-        )
+        .replace("https://p.scdn.co/mp3-preview/", `/proxy/`)
         .split("?")[0];
       const lastScraped = new Date().toISOString();
       res.statusCode = 200;

@@ -9,11 +9,9 @@ const PrivacyHero = () => {
             Privacy Policy
           </h1>
           <div className="text-left mt-10">
+            <p className="mx-auto text-lg mt-12">Last updated: June 27, 2023</p>
             <p className="mx-auto text-lg mt-12">
-              Last updated: November 4, 2022
-            </p>
-            <p className="mx-auto text-lg mt-12">
-              At SpotifyInfo, we believe that privacy is a fundemental right and
+              At SpotifyInfo, we believe that privacy is a fundamental right and
               strive to be as transparent as possible about how we use your
               information. We will not sell, lease, or exchange your personal
               data to, or otherwise share your personal data with, third parties
@@ -92,7 +90,7 @@ const PrivacyHero = () => {
             <p className="mx-auto text-lg mt-12">
               SpotifyInfo does not use analytics, cookies or logging on our
               website. However, our hosting provider may keep logs and collect
-              informaiton such as IP addresses.
+              information such as IP addresses.
             </p>
             <h2 className="text-2xl font-bold my-12 underline">
               Third Party Privacy Policies

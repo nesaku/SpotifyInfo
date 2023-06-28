@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import PathQuery from "../components/PathQuery";
 
 const Slug = () => {
-  /* Take the ath from the URL and pass it to the PathQuery component */
+  /* Take the path from the URL and pass it to the PathQuery component */
   const router = useRouter();
   const { slug } = router.query;
 

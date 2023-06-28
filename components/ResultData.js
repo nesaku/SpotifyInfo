@@ -92,7 +92,7 @@ const ResultData = ({ scrapedData }) => {
               </audio>
             )}
             {/*
-        <h2 className="font-bold text-2xl my-6 underline">Embeded Preview</h2>
+        <h2 className="font-bold text-2xl my-6 underline">Embedded Preview</h2>
         {scrapedData.trackID !== undefined && (
           <iframe
             className="rounded-lg"
