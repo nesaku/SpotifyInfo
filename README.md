@@ -34,7 +34,6 @@ SpotifyInfo - Get Info On A Spotify Track
 | -------------------------------------------------------------------------------- | :-----: | -------------------- | ------------------------------------------------------------ |
 | [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app)                       |  :us:   | Netlify              | Run by [me](https://github.com/nesaku)                       |
 | [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)                         |  :us:   | Vercel               | Run by [me](https://github.com/nesaku)                       |
-| [listen-spotify.whateveritworks.org](https://listen-spotify.whateveritworks.org) |  :de:   | Hetzner (Cloudflare) | Run by [WhateverItWorks](https://github.com/WhateverItWorks) |
 
 ---
 
