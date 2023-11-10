@@ -1,15 +1,67 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Meta from "./Meta";
 
 // Used "const ResultData = ({ scrapedData })" instead of "const ResultData = (props.scrapedData) for readability
 const ResultData = ({ scrapedData }) => {
+  const audioRef = useRef();
+
   /*Convert Seconds to Minutes:Seconds Format */
   function convertDuration(time) {
     return (
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
     );
   }
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    {
+      /* Use the Media Session API */
+    }
+    if ("mediaSession" in navigator) {
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: scrapedData.title,
+        artist: scrapedData.artist,
+        artwork: [
+          {
+            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=128&h=128`,
+            sizes: "128x128",
+            type: "image/jpg",
+          },
+          {
+            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=192&h=192`,
+            sizes: "192x192",
+            type: "image/jpg",
+          },
+          {
+            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=256&h=256`,
+            sizes: "256x256",
+            type: "image/jpg",
+          },
+          {
+            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=384&h=384`,
+            sizes: "384x384",
+            type: "image/jpg",
+          },
+          {
+            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=512&h=512`,
+            sizes: "512x512",
+            type: "image/jpg",
+          },
+        ],
+      });
+
+      navigator.mediaSession.setActionHandler("play", () => audio.play());
+      navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+    }
+    return () => {
+      if ("mediaSession" in navigator) {
+        navigator.mediaSession.setActionHandler("play", null);
+        navigator.mediaSession.setActionHandler("pause", null);
+        navigator.mediaSession.metadata = null;
+      }
+    };
+  }, [scrapedData]);
 
   return (
     <>
@@ -86,7 +138,7 @@ const ResultData = ({ scrapedData }) => {
             <span className="max-w-lg text-md">{scrapedData.releaseDate}</span>
             <h2 className="font-bold text-2xl my-6 underline">Preview</h2>
             {scrapedData.previewURL !== undefined && (
-              <audio controls>
+              <audio controls ref={audioRef}>
                 <source src={`${scrapedData.previewURL}`} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
