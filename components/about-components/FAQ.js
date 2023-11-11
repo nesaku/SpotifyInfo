@@ -85,25 +85,6 @@ const FAQ = () => {
               </code>{" "}
               button.
               <br />
-              <b>OR</b>
-              <br />
-              3. Append{" "}
-              <a
-                className="underline text-green-600 dark:text-green-500/80"
-                href="https://open.spotify.com"
-                target="_blank"
-                rel="noreferrer"
-              >
-                https://open.spotify.com
-              </a>{" "}
-              of any Spotify track page URL with spotifyinfo.netlify.app. Then
-              click the{" "}
-              <code>
-                <span className="bg-gray-300 dark:bg-slate-900 px-2 py-1 rounded-lg">
-                  Fetch Data
-                </span>
-              </code>{" "}
-              button.
             </p>
           </details>
           <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">

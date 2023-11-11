@@ -30,10 +30,10 @@ SpotifyInfo - Get Info On A Spotify Track
 
 ## Instances
 
-| Instance URL                                                                     | Country | Provider             | Notes                                                        |
-| -------------------------------------------------------------------------------- | :-----: | -------------------- | ------------------------------------------------------------ |
-| [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app)                       |  :us:   | Netlify              | Run by [me](https://github.com/nesaku)                       |
-| [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)                         |  :us:   | Vercel               | Run by [me](https://github.com/nesaku)                       |
+| Instance URL                                               | Country | Provider | Notes                                  |
+| ---------------------------------------------------------- | :-----: | -------- | -------------------------------------- |
+| [spotifyinfo.netlify.app](https://spotifyinfo.netlify.app) |  :us:   | Netlify  | Run by [me](https://github.com/nesaku) |
+| [spotifyinfo.vercel.app](https://spotifyinfo.vercel.app)   |  :us:   | Vercel   | Run by [me](https://github.com/nesaku) |
 
 ---
 
@@ -45,7 +45,6 @@ There are two ways you can use SpotifyInfo:
 
 1. Visit [spotifyinfo.netlify.app](spotifyinfo.netlify.app) and paste the Spotify track URL/URI into the input box.
 2. Replace `https://open.spotify.com` of any URL/URI with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
-3. Append `https://open.spotify.com` of any URL/URI with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
 
 ### How Does This Work? - Scraping
 
