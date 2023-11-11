@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Meta from "./Meta";
 
 // Used "const ResultData = ({ scrapedData })" instead of "const ResultData = (props.scrapedData) for readability
 const ResultData = ({ scrapedData }) => {
+  const [data, setData] = useState(null);
   const audioRef = useRef();
 
   /*Convert Seconds to Minutes:Seconds Format */
@@ -14,10 +15,42 @@ const ResultData = ({ scrapedData }) => {
   }
 
   useEffect(() => {
-    const audio = audioRef.current;
-    {
-      /* Use the Media Session API */
+    // Get Youtube Music audio using Piped
+    if (scrapedData.title) {
+      const fetchData = async () => {
+        try {
+          const searchResult = await fetch(
+            `https://pipedapi.kavin.rocks/search?q=${encodeURIComponent(
+              scrapedData.title
+            )}&filter=music_songs`
+          );
+          if (!searchResult.ok) {
+            throw new Error(`HTTP error! status: ${searchResult.status}`);
+          }
+          const data1 = await searchResult.json();
+          const playerResult = await fetch(
+            `https://pipedapi.kavin.rocks/streams${data1.items[0].url.replace(
+              "watch?v=",
+              ""
+            )}`
+          );
+          if (!playerResult.ok) {
+            throw new Error(`HTTP error! status: ${playerResult.status}`);
+          }
+          const musicResult = await playerResult.json();
+
+          setData(musicResult);
+        } catch (error) {
+          console.error("An error occurred while fetching the data.", error);
+        }
+      };
+
+      fetchData();
     }
+
+    // Use the Media Session API
+    const audio = audioRef.current;
+
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: scrapedData.title,
@@ -143,19 +176,34 @@ const ResultData = ({ scrapedData }) => {
                 Your browser does not support the audio element.
               </audio>
             )}
+            {data && (
+              <>
+                <h2 className="font-bold text-2xl my-6 underline">
+                  Listen on YouTube Music
+                </h2>
+                <audio controls>
+                  <source
+                    src={data.audioStreams[4].url}
+                    type="audio/webm; codecs=opus"
+                  />
+                  <source src={data.audioStreams[1].url} type="audio/mp4" />
+                  Your browser does not support the audio element.
+                </audio>
+              </>
+            )}
             {/*
-        <h2 className="font-bold text-2xl my-6 underline">Embedded Preview</h2>
-        {scrapedData.trackID !== undefined && (
-          <iframe
-            className="rounded-lg"
-            src={`https://open.spotify.com/embed/${scrapedData.trackID}`}
-            frameBorder="0"
-            allowfullscreen=""
-            allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
-        )}
-        */}
+              <h2 className="font-bold text-2xl my-6 underline">Embedded Preview</h2>
+              {scrapedData.trackID !== undefined && (
+                <iframe
+                  className="rounded-lg"
+                  src={`https://open.spotify.com/embed/${scrapedData.trackID}`}
+                  frameBorder="0"
+                  allowfullscreen=""
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  loading="lazy"
+                ></iframe>
+              )}
+            */}
             <h2 className="font-bold text-2xl my-6 underline">Spotify URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
               <a target="_blank" rel="noreferrer" href={`${scrapedData.url}`}>
