@@ -78,28 +78,6 @@ const ResultData = ({ scrapedData }) => {
   return (
     <>
       <Meta title={scrapedData.title || undefined} />
-      {!scrapedData.title && (
-        <div className="flex flex-col justify-center max-w-2xl text-center mx-auto h-[74vh]">
-          <h1 id="error" className="text-red-600 font-bold text-5xl uppercase">
-            Error - Track Not Found
-          </h1>
-          <h2 className="my-12 text-lg text-black font-bold dark:text-gray-100">
-            An Example Of A Valid Query Is:
-            <p className="font-normal">
-              https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn
-            </p>
-          </h2>
-          <div className="mx-auto">
-            <a
-              href="/"
-              className="font-semibold text-md text-gray-900 dark:text-white bg-green-500 ring ring-green-600 ring-offset-2 ring-offset-green-100 py-5 px-2 rounded-xl shadow-lg shadow-green-500 hover:shadow-xl hover:bg-green-600 transition duration-300 delay-40 hover:delay-40"
-            >
-              Go Back Home
-            </a>
-          </div>
-        </div>
-      )}
-      {/* Don't show result data if the title is not loaded */}
       {scrapedData.title && (
         <div className="flex items-center flex-col text-gray-900 dark:text-gray-200">
           <div className="mt-10 md:mt-32 mb-20 text-center max-w-sm">
