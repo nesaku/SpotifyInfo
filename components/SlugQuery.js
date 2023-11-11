@@ -13,12 +13,14 @@ const SlugQuery = ({ path }) => {
     setIsLoading(true);
 
     /* Send the fetch request to scraperSlug API */
-    fetch("/api/scraperSlug", {
+    fetch("/api/spotifyScraper", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ queryURL: path }),
+      body: JSON.stringify({
+        queryURL: `https://open.spotify.com/track/${path}`,
+      }),
     })
       .then((res) => res.json())
       .then((userData) => {
