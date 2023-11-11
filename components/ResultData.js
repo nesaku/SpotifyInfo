@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import Meta from "./Meta";
 
 // Used "const ResultData = ({ scrapedData })" instead of "const ResultData = (props.scrapedData) for readability
 const ResultData = ({ scrapedData }) => {
-  const [data, setData] = useState(null);
   const audioRef = useRef();
 
   /*Convert Seconds to Minutes:Seconds Format */
@@ -15,42 +14,7 @@ const ResultData = ({ scrapedData }) => {
   }
 
   useEffect(() => {
-    // Get Youtube Music audio using Piped
-    if (scrapedData.title) {
-      const fetchData = async () => {
-        try {
-          const searchResult = await fetch(
-            `https://pipedapi.kavin.rocks/search?q=${encodeURIComponent(
-              scrapedData.title
-            )}&filter=music_songs`
-          );
-          if (!searchResult.ok) {
-            throw new Error(`HTTP error! status: ${searchResult.status}`);
-          }
-          const data1 = await searchResult.json();
-          const playerResult = await fetch(
-            `https://pipedapi.kavin.rocks/streams${data1.items[0].url.replace(
-              "watch?v=",
-              ""
-            )}`
-          );
-          if (!playerResult.ok) {
-            throw new Error(`HTTP error! status: ${playerResult.status}`);
-          }
-          const musicResult = await playerResult.json();
-
-          setData(musicResult);
-        } catch (error) {
-          console.error("An error occurred while fetching the data.", error);
-        }
-      };
-
-      fetchData();
-    }
-
     // Use the Media Session API
-    const audio = audioRef.current;
-
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
         title: scrapedData.title,
@@ -84,9 +48,24 @@ const ResultData = ({ scrapedData }) => {
         ],
       });
 
-      navigator.mediaSession.setActionHandler("play", () => audio.play());
-      navigator.mediaSession.setActionHandler("pause", () => audio.pause());
+      // Action handlers for the media session
+      navigator.mediaSession.setActionHandler("play", () => {
+        audioRef.current.play();
+      });
+      navigator.mediaSession.setActionHandler("pause", () => {
+        audioRef.current.pause();
+      });
+      navigator.mediaSession.setActionHandler("seekbackward", () => {
+        audioRef.current.currentTime -= 10;
+      });
+      navigator.mediaSession.setActionHandler("seekforward", () => {
+        audioRef.current.currentTime += 10;
+      });
+      navigator.mediaSession.setActionHandler("seekto", (details) => {
+        audioRef.current.currentTime = details.seekTime;
+      });
     }
+
     return () => {
       if ("mediaSession" in navigator) {
         navigator.mediaSession.setActionHandler("play", null);
@@ -175,21 +154,6 @@ const ResultData = ({ scrapedData }) => {
                 <source src={`${scrapedData.previewURL}`} type="audio/mpeg" />
                 Your browser does not support the audio element.
               </audio>
-            )}
-            {data && (
-              <>
-                <h2 className="font-bold text-2xl my-6 underline">
-                  Listen on YouTube Music
-                </h2>
-                <audio controls>
-                  <source
-                    src={data.audioStreams[4].url}
-                    type="audio/webm; codecs=opus"
-                  />
-                  <source src={data.audioStreams[1].url} type="audio/mp4" />
-                  Your browser does not support the audio element.
-                </audio>
-              </>
             )}
             {/*
               <h2 className="font-bold text-2xl my-6 underline">Embedded Preview</h2>

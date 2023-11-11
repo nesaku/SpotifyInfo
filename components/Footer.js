@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
-  console.log(`%cVersion: 1.10.0`, `color:green`);
+  console.log(`%cVersion: 1.10.1`, `color:green`);
   return (
     <footer aria-label="Site Footer" className="text-center w-full mt-auto">
       <div className="flex justify-center items-center content-center  mx-auto max-w-screen-xl px-4 py-12 sm:px-6 lg:px-8">
