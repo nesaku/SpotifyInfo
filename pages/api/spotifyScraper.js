@@ -40,6 +40,7 @@ const spotify = async (req, res) => {
         .split("?")[0];
       const lastScraped = new Date().toISOString();
       res.statusCode = 200;
+      res.setHeader("Cache-Control", "public, max-age=3600");
       return res.json({
         scrapeURL: scrapeURL,
         cover: cover,
