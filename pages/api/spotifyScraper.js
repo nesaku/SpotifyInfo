@@ -1,9 +1,8 @@
 const cheerio = require("cheerio");
 
-const spotify = async (req, res) => {
+const spotifyScraper = async (req, res) => {
   if (req.method === "POST") {
     const scrapeURL = req.body.queryURL.split("?")[0];
-
     try {
       {
         /*const response = await fetch(`${scrapeURL}`);*/
@@ -64,7 +63,12 @@ const spotify = async (req, res) => {
         error: `${scrapeURL} Not Found. An Example Of A Valid Query Is: https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn`,
       });
     }
+  } else {
+    res.statusCode = 405;
+    return res.json({
+      status: "Error 405 - Method Not Allowed",
+    });
   }
 };
 
-export default spotify;
+export default spotifyScraper;
