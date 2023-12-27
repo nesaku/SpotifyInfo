@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -6,47 +5,49 @@ const Header = () => {
   return (
     <header className="p-4 dark:bg-green-700 dark:text-green-100 border-b-2 dark:border-b-0 border-green-300">
       <div className="container flex justify-between items-center h-16 mx-auto">
-        <a
+        <Link
           href={"/"}
           aria-label="Back to homepage"
           className="flex items-center mx-auto lg:mx-32"
         >
-          <Image
-            src="/logo.svg"
+          <img
+            className="w-16 h-16"
+            src="http://localhost:3000/logo.svg"
             alt="SpotifyInfo Logo"
-            width="64px"
-            height="64px"
           />
-        </a>
+        </Link>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">
-            <a
+            <Link
               href={"/"}
               className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
             >
               Home
-            </a>
-          </li>
-          <li className="flex">
-            <Link href={`/#faq`}>
-              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
-                FAQ
-              </a>
             </Link>
           </li>
           <li className="flex">
-            <Link href={`/contact`}>
-              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
-                Contact
-              </a>
+            <Link
+              href={`/#faq`}
+              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            >
+              FAQ
+            </Link>
+          </li>
+          <li className="flex">
+            <Link
+              href={`/contact`}
+              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            >
+              Contact
             </Link>
           </li>
 
           <li className="flex">
-            <Link href={`/privacy`}>
-              <a className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300">
-                Privacy
-              </a>
+            <Link
+              href={`/privacy`}
+              className="flex items-center px-4 -mb-1 border-b-2 border-green-400 hover:border-green-600 transition duration-300 delay-150 hover:delay-100 dark:border-gray-300"
+            >
+              Privacy
             </Link>
           </li>
           <li className="flex">

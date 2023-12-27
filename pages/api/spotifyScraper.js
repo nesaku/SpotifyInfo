@@ -4,18 +4,12 @@ const spotifyScraper = async (req, res) => {
   if (req.method === "POST") {
     const scrapeURL = req.body.queryURL.split("?")[0];
     try {
-      {
-        /*const response = await fetch(`${scrapeURL}`);*/
-      }
       const response = await fetch(`${scrapeURL}`, {
         method: "GET",
         headers: new Headers({
-          /* 
-        "User-Agent"   : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/106.0.0.0 Safari/537.36"
-        */
           "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT
             ? process.env.NEXT_PUBLIC_USER_AGENT
-            : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36",
+            : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
         }),
       });
       const htmlString = await response.text();

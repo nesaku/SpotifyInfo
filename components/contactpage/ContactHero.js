@@ -9,17 +9,25 @@ const ContactHero = () => {
             Contact Us
           </h1>
           <h2 className="mt-20 text-2xl">
-            {" "}
-            Have something to say? Please feel free to open an{" "}
+            Have something to say? Please feel free to open an issue on{" "}
             <a
               className="text-blue-600 dark:text-blue-500 underline"
               href="https://github.com/nesaku/SpotifyInfo/issues"
               target="_blank"
               rel="noreferrer"
             >
-              issue
+              GitHub
             </a>{" "}
-            on GitHub or use the contact form below.
+            /{" "}
+            <a
+              className="text-blue-600 dark:text-blue-500 underline"
+              href="https://codeberg.org/nesaku/SpotifyInfo/issues"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Codeberg
+            </a>{" "}
+            or use the contact form below.
           </h2>
         </div>
       </div>

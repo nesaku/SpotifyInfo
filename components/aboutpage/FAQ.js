@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const FAQ = () => {
@@ -7,7 +8,7 @@ const FAQ = () => {
       <div className="flex justify-center mt-10">
         <div
           id="faq"
-          className="max-w-4xl w-11/12 bg-gray-400/20 dark:bg-transparent/20 rounded-2xl border-2 border-gray-400 dark:border-4 dark:border-gray-400"
+          className="max-w-4xl w-11/12 bg-white/30 dark:bg-transparent/20 rounded-2xl border-2 border-gray-400 dark:border-4 dark:border-gray-400"
         >
           <details
             className="group p-6 border-t-0 border-gray-400 dark:border-gray-400"
@@ -218,19 +219,19 @@ const FAQ = () => {
             <p className="mt-4 mx-8 leading-relaxed text-gray-800 dark:text-gray-200">
               Nothing. Since we don&apos;t collect any user data we can&apos;t
               use it, you can check out our{" "}
-              <a
+              <Link
                 className="text-blue-600 dark:text-blue-500 underline"
                 href="/privacy"
                 target="_blank"
                 rel="noreferrer"
               >
                 privacy policy
-              </a>{" "}
+              </Link>{" "}
               for more info. If you still don&apos;t trust us, feel free to take
               a look at our{" "}
               <a
                 className="text-blue-600 dark:text-blue-500 underline"
-                href="/privacy"
+                href="https://github.com/nesaku/SpotifyInfo/issues"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -291,14 +292,12 @@ const FAQ = () => {
                 GitHub
               </a>{" "}
               or use the{" "}
-              <a
+              <Link
                 className="text-blue-600 dark:text-blue-500 underline"
                 href="/contact"
-                target="_blank"
-                rel="noreferrer"
               >
                 contact form
-              </a>
+              </Link>
               .
             </p>
           </details>
@@ -352,14 +351,12 @@ const FAQ = () => {
                 GitHub
               </a>{" "}
               or use the{" "}
-              <a
+              <Link
                 className="text-blue-600 dark:text-blue-500 underline"
                 href="/contact"
-                target="_blank"
-                rel="noreferrer"
               >
                 contact form
-              </a>
+              </Link>
               .
             </p>
           </details>

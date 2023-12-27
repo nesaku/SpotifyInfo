@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const PrivacyHero = () => {
@@ -137,13 +138,9 @@ const PrivacyHero = () => {
                 issue
               </a>{" "}
               or by using the form on our{" "}
-              <a
-                className="underline"
-                rel="noreferrer"
-                href={`${process.env.NEXT_PUBLIC_HOST_URL}/contact`}
-              >
+              <Link className="underline" href="/contact">
                 contact page
-              </a>
+              </Link>
               .
             </p>
 
