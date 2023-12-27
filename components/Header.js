@@ -10,11 +10,7 @@ const Header = () => {
           aria-label="Back to homepage"
           className="flex items-center mx-auto lg:mx-32"
         >
-          <img
-            className="w-16 h-16"
-            src="http://localhost:3000/logo.svg"
-            alt="SpotifyInfo Logo"
-          />
+          <img className="w-16 h-16" src="/logo.svg" alt="SpotifyInfo Logo" />
         </Link>
         <ul className="items-stretch hidden space-x-3 lg:flex">
           <li className="flex">

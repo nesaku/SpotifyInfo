@@ -129,7 +129,10 @@ const ResultData = ({ scrapedData }) => {
             <h2 className="font-bold text-2xl my-6 underline">Preview</h2>
             {scrapedData.previewURL !== undefined && (
               <audio controls ref={audioRef}>
-                <source src={`${scrapedData.previewURL}`} type="audio/mpeg" />
+                <source
+                  src={`/api/audioProxy?audioURL=${scrapedData.previewURL}`}
+                  type="audio/mpeg"
+                />
                 Your browser does not support the audio element.
               </audio>
             )}

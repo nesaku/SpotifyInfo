@@ -2,8 +2,8 @@ import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
-  const version = "v2.0.0";
-  const versionSlug = "200---dec-26-2023";
+  const version = "v2.1.0";
+  const versionSlug = "210---dec-27-2023";
 
   console.log(`%c${version && version}`, `color:green`);
 

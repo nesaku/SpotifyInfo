@@ -29,7 +29,6 @@ const spotifyScraper = async (req, res) => {
       const duration = $('meta[name="music:duration"]').attr("content");
       const previewURL = $('meta[property="og:audio"]')
         .attr("content")
-        .replace("https://p.scdn.co/mp3-preview/", `/proxy/`)
         .split("?")[0];
       const lastScraped = new Date().toISOString();
       res.statusCode = 200;
