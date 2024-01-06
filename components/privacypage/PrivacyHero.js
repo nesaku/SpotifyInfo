@@ -10,7 +10,9 @@ const PrivacyHero = () => {
             Privacy Policy
           </h1>
           <div className="text-left mt-10">
-            <p className="mx-auto text-lg mt-12">Last updated: June 27, 2023</p>
+            <p className="mx-auto text-lg mt-12">
+              Last updated: December 30, 2023
+            </p>
             <p className="mx-auto text-lg mt-12">
               At SpotifyInfo, we believe that privacy is a fundamental right and
               strive to be as transparent as possible about how we use your
@@ -90,8 +92,9 @@ const PrivacyHero = () => {
 
             <p className="mx-auto text-lg mt-12">
               SpotifyInfo does not use analytics, cookies or logging on our
-              website. However, our hosting provider may keep logs and collect
-              information such as IP addresses.
+              website. SpotifyInfo does use localStorage to prevent unnecessary
+              access token requests. However, our hosting provider may keep logs
+              and collect information such as IP addresses.
             </p>
             <h2 className="text-2xl font-bold my-12 underline">
               Third Party Privacy Policies
@@ -128,14 +131,23 @@ const PrivacyHero = () => {
             <p className="mx-auto text-lg mt-12">
               If you have additional questions or require more information about
               our Privacy Policy, do not hesitate to contact us. You may contact
-              us by creating an{" "}
+              us by creating an issue on{" "}
               <a
                 className="underline"
                 target="_blank"
                 rel="noreferrer"
                 href="https://github.com/nesaku/SpotifyInfo/issues"
               >
-                issue
+                GitHub
+              </a>
+              /
+              <a
+                className="underline"
+                target="_blank"
+                rel="noreferrer"
+                href="https://codeberg.org/nesaku/SpotifyInfo/issues"
+              >
+                Codeberg
               </a>{" "}
               or by using the form on our{" "}
               <Link className="underline" href="/contact">

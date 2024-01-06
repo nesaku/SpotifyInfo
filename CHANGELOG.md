@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - Jan 6, 2023
+
+**Started using the [Spotify Web API](https://developer.spotify.com/documentation/web-api) for certain routes**
+
+### Added
+
+- Add support for playlists
+- Add proxy support for the Spotify Web API and access token requests
+- Add a check to only accept valid Spotify URLs/URIs
+
+### Changed
+
+- Update privacy policy to include local storage being used
+- Update contact page to include the Codeberg link to create issues
+- Update the README and FAQ section on how SpotifyInfo works
+- Remove album art opening in new tab when clicked
+
+### Fixed
+
+- Fix only the lowest quality album art being shown on iOS
+- Fix audio showing up as a "Live Broadcast" in Safari
+- Fix hero text not overflow being hidden instead of word wrapping
+
 ## [2.1.0] - Dec 27, 2023
 
 ### Added
@@ -20,6 +43,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix the header logo src not being relative
 
 ## [2.0.0] - Dec 27, 2023
+
+**Upgrade to Next.js 14**
 
 ### Added
 

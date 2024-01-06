@@ -32,6 +32,8 @@ const audioProxy = async (req, res) => {
 
     const buffer = await response.arrayBuffer();
     res.setHeader("Content-Type", "audio/mpeg");
+    res.setHeader("Content-Length", buffer.byteLength);
+    res.setHeader("Accept-Ranges", "bytes");
     res.end(Buffer.from(buffer));
   } catch (error) {
     console.error(error);

@@ -126,9 +126,10 @@ const FAQ = () => {
             </summary>
 
             <p className="mt-4 mx-8 leading-relaxed text-gray-800 dark:text-gray-200">
-              Short Answer - Scraping. <br />
-              SpotifyInfo instead goes to the Spotify track page and scrapes the
-              required content.
+              Short Answer - Scraping And The Spotify Web API. <br />
+              SpotifyInfo goes to the Spotify track page and scrapes the
+              required content or uses the Spotify Web API to get the required
+              data.
             </p>
           </details>
           <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">

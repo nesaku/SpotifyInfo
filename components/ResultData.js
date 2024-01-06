@@ -20,7 +20,7 @@ const ResultData = ({ scrapedData }) => {
         title: scrapedData.title,
         artist: scrapedData.artist,
         artwork: [
-          {
+          /* {
             src: `https://wsrv.nl/?url=${scrapedData.cover}&w=128&h=128`,
             sizes: "128x128",
             type: "image/jpg",
@@ -34,7 +34,7 @@ const ResultData = ({ scrapedData }) => {
             src: `https://wsrv.nl/?url=${scrapedData.cover}&w=256&h=256`,
             sizes: "256x256",
             type: "image/jpg",
-          },
+          }, */
           {
             src: `https://wsrv.nl/?url=${scrapedData.cover}&w=384&h=384`,
             sizes: "384x384",
@@ -91,31 +91,24 @@ const ResultData = ({ scrapedData }) => {
             <div className="mt-10 mx-auto p-4 background-image: url(/cover-placeholder.svg)">
               <h1 className="hidden">Cover:</h1>
               {/* Load WebP Image With JPG Fallback & 404 Not Found Image*/}
-              <a
-                href={scrapedData.cover}
-                rel="noreferrer noopener"
-                target="_blank"
-                alt={`${scrapedData.title} cover art`}
-              >
-                <picture>
-                  <source
-                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
-                    type="image/webp"
-                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                  />
-                  <source
-                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                    type="image/jpeg"
-                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                  />
-                  <img
-                    src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                    alt={scrapedData.coverAltText}
-                    className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-all duration-600 ease-in-out hover:scale-105"
-                    loading="eager"
-                  />
-                </picture>
-              </a>
+              <picture>
+                <source
+                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
+                  type="image/webp"
+                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
+                />
+                <source
+                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                  type="image/jpeg"
+                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
+                />
+                <img
+                  src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                  alt={scrapedData.coverAltText}
+                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-all duration-600 ease-in-out hover:scale-105"
+                  loading="eager"
+                />
+              </picture>
             </div>
           </div>
           <div id="divider" className="p-0 lg:p-2"></div>
@@ -136,19 +129,6 @@ const ResultData = ({ scrapedData }) => {
                 Your browser does not support the audio element.
               </audio>
             )}
-            {/*
-              <h2 className="font-bold text-2xl my-6 underline">Embedded Preview</h2>
-              {scrapedData.trackID !== undefined && (
-                <iframe
-                  className="rounded-lg"
-                  src={`https://open.spotify.com/embed/${scrapedData.trackID}`}
-                  frameBorder="0"
-                  allowfullscreen=""
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                ></iframe>
-              )}
-            */}
             <h2 className="font-bold text-2xl my-6 underline">Spotify URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
               <a target="_blank" rel="noreferrer" href={`${scrapedData.url}`}>

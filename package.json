@@ -1,7 +1,7 @@
 {
   "name": "spotifyinfo",
-  "version": "2.0.0",
-  "description": "Get Info On A Spotify Track",
+  "version": "3.0.0",
+  "description": "Get Info On A Spotify track",
   "private": true,
   "author": "Nesaku",
   "license": "AGPL-3.0-or-later",

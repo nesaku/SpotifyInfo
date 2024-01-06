@@ -46,11 +46,9 @@ There are two ways you can use SpotifyInfo:
 1. Visit [spotifyinfo.netlify.app](spotifyinfo.netlify.app) and paste the Spotify track URL/URI into the input box.
 2. Replace `https://open.spotify.com` of any URL/URI with `spotifyinfo.netlify.app`. Then click the "Fetch Data" button.
 
-### How Does This Work? - Scraping
+### How Does This Work? - Scraping And The Spotify Web API
 
-While the [Spotify developer Web API](https://developer.spotify.com/documentation/web-api/) could have been used for this project. I weighed the pros and cons and chose to go with scraping the required content off the track page instead.
-
-Some of the pros of the Spotify Web API are that it is more stable than scraping, it is more quicker than scraping, good documentation, officially suported, the API has many features and etc. Some of the cons of the Web API are that all requests made are tied to a single developer token, their [Developer Terms of Service](https://developer.spotify.com/terms/) must be followed and that a developer account is required to use the Web API.
+SpotifyInfo goes to the Spotify track page and scrapes the required content or uses the [Spotify Web API](https://developer.spotify.com/documentation/web-api/) to get the required data.
 
 ### Why Is This Slower Than Spotify?
 

@@ -31,7 +31,7 @@ const Meta = (props) => {
       <link rel="manifest" href="/site.webmanifest" />
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#121212" />
       <meta name="msapplication-TileColor" content="#121212" />
-      <meta name="theme-color" content="#ffffff"></meta>
+      <meta name="theme-color" content="#15803d"></meta>
       <meta property="og:title" content="SpotifyInfo" />
       <meta
         property="og:description"
