@@ -55,15 +55,13 @@ const Slug = () => {
         const data = await res.json();
         setData(data);
         setIsLoading(false);
-        // console.log("Successfully fetched data");
       } else {
         setIsLoading(false);
         setError(true);
-        // console.log("Failed to fetch data");
       }
     };
 
-    /* Fetch Spotify API directly
+    /* Fetch the Spotify API directly
     
     const fetchData = async () => {
       const res = await fetch(

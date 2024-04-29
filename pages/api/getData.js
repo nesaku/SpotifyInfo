@@ -8,12 +8,7 @@ const GetData = async (req, res) => {
     name,
     owner,
     tracks(
-        items(
-            added_at,
-            track(!available_markets),
-            track(album(!available_markets)
-          )
-        ),
+        items,
         next,
         previous,
         total

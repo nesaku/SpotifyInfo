@@ -96,7 +96,6 @@ const PlaylistResultData = ({ data }) => {
       }
     };
   }, [currentAudio]);
-
   return (
     <>
       <Meta title={data.name + " Playlist" || undefined} />
