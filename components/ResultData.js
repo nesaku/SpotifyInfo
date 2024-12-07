@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Meta from "./Meta";
 
 // Used "const ResultData = ({ scrapedData })" instead of "const ResultData = (props.scrapedData) for readability
 const ResultData = ({ scrapedData }) => {
+  const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef();
 
   /*Convert Seconds to Minutes:Seconds Format */
@@ -91,24 +92,34 @@ const ResultData = ({ scrapedData }) => {
             <div className="mt-10 mx-auto p-4 background-image: url(/cover-placeholder.svg)">
               <h1 className="hidden">Cover:</h1>
               {/* Load WebP Image With JPG Fallback & 404 Not Found Image*/}
-              <picture>
-                <source
-                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
-                  type="image/webp"
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                />
-                <source
-                  srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                  type="image/jpeg"
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl"
-                />
-                <img
-                  src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                  alt={scrapedData.coverAltText}
-                  className="rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-all duration-600 ease-in-out hover:scale-105"
-                  loading="eager"
-                />
-              </picture>
+              <div className="relative w-full h-full">
+                {isLoading && (
+                  <div className="absolute inset-0 flex justify-center items-center bg-gray-300 animate-pulse rounded-2xl shadow-2xl drop-shadow-xl"></div>
+                )}
+                <picture className="w-full h-full">
+                  <source
+                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
+                    type="image/webp"
+                    className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl 
+                      ${isLoading ? "hidden" : ""}`}
+                  />
+                  <source
+                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    type="image/jpeg"
+                    className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl 
+                      ${isLoading ? "hidden" : ""}`}
+                  />
+                  <img
+                    src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    alt={scrapedData.coverAltText}
+                    className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-opacity duration-500 ease-in-out ${
+                      isLoading ? "opacity-0" : "opacity-100"
+                    }`}
+                    loading="eager"
+                    onLoad={() => setIsLoading(false)}
+                  />
+                </picture>
+              </div>
             </div>
           </div>
           <div id="divider" className="p-0 lg:p-2"></div>
@@ -129,12 +140,13 @@ const ResultData = ({ scrapedData }) => {
                 Your browser does not support the audio element.
               </audio>
             )}
-            <h2 className="font-bold text-2xl my-6 underline">Spotify URL:</h2>
+            <h2 className="font-bold text-2xl my-6 underline">Track URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
               <a target="_blank" rel="noreferrer" href={`${scrapedData.url}`}>
                 {scrapedData.url}
               </a>
             </span>
+            {/* 
             <h2 className="font-bold text-2xl my-6 underline">
               Spotify App URL:
             </h2>
@@ -146,17 +158,31 @@ const ResultData = ({ scrapedData }) => {
               >
                 spotify://{scrapedData.trackID}
               </a>
-            </span>
-            <h2 className="font-bold text-2xl my-6 underline">Spotify URI:</h2>
+            </span> 
+            */}
+            <h2 className="font-bold text-2xl my-6 underline">Track URI:</h2>
             <span className="max-w-lg text-md">
               spotify:{scrapedData.trackID.replace("track/", "track:")}
             </span>
-            <h2 className="font-bold text-2xl my-6 underline">
+            <h2 className="font-bold text-2xl my-6 underline">Album URL:</h2>
+            <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
+              <a target="_blank" rel="noreferrer" href={`${scrapedData.album}`}>
+                {scrapedData.album}
+              </a>
+            </span>
+            <h2 className="font-bold text-2xl my-6 underline">Album URI:</h2>
+            <span className="max-w-lg text-md">
+              {scrapedData.album.replace(
+                "https://open.spotify.com/album/",
+                "spotify:album:"
+              )}
+            </span>
+            {/*   <h2 className="font-bold text-2xl my-6 underline">
               Last Scraped:{" "}
             </h2>
             <span className="text-md mb-60">
               <code>{scrapedData.lastScraped}</code>
-            </span>
+            </span> */}
           </div>
         </div>
       )}

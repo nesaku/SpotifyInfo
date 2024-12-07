@@ -34,10 +34,10 @@ const FormQuery = () => {
     <>
       <div className="flex flex-col text-center p-20 mb-20">
         <div className="visible pt-10 sm:pt-20 pb-10">
-          <h1 className="font-extrabold text-transparent text-6xl sm:text-8xl bg-clip-text bg-gradient-to-br from-green-400 to-green-600 p-2 break-words">
+          <h1 className="font-extrabold text-transparent text-7xl sm:text-8xl bg-clip-text bg-gradient-to-br from-green-400 to-green-600 p-2 break-words sm:break-normal">
             SpotifyInfo
           </h1>
-          <h2 className="mt-10 text-2xl md:text-4xl text-transparent font-bold text-black dark:text-gray-200">
+          <h2 className="text-2xl md:text-4xl mt-10 font-bold text-black dark:text-gray-200">
             Get Info About A Spotify Track:
           </h2>
         </div>
@@ -45,7 +45,7 @@ const FormQuery = () => {
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col items-center justify-center text-center">
             <label className="flex flex-col">
-              <h3 className="text-xlmd:text-2xl text-black dark:text-gray-200 font-semibold mb-10">
+              <h3 className="text-xl md:text-2xl text-black dark:text-gray-200 font-semibold mb-2">
                 Enter A Spotify URL/URI: &nbsp;
               </h3>
               <input

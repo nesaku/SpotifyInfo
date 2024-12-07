@@ -20,6 +20,7 @@ const spotifyScraper = async (req, res) => {
       const artist = $('meta[property="og:description"]')
         .attr("content")
         .replace("Song · ", "");
+      const album = $('meta[name="music:album"]').attr("content");
       const url = $('meta[property="og:url"]').attr("content");
       const uri = $('meta[name="al:android:url"]').attr("content");
       const trackID = $('meta[name="al:android:url"]')
@@ -41,6 +42,7 @@ const spotifyScraper = async (req, res) => {
         cover: cover,
         title: title,
         artist: artist,
+        album: album,
         url: url,
         uri: uri,
         trackID: trackID,
