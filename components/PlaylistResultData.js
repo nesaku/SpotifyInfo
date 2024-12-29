@@ -111,30 +111,30 @@ const PlaylistResultData = ({ data }) => {
           />
 
           <img
-            className="relative h-72 w-72 object-cover rounded-md"
+            className="relative h-72 w-72 lg:min-h-72 lg:min-w-72 object-cover rounded-md"
             src={data.images[0].url}
             alt="Main Image"
           />
         </div>
-        <div id="listInfo" className="text-wrap break-all px-2 lg:px-8 py-8">
+        <div id="listInfo" className="px-2 lg:px-8 py-8">
           <p className="capitalize text-sm pb-1 text-center lg:text-start">
             {data.type}
           </p>
-          <h1 className="text-5xl lg:text-7xl font-bold text-center lg:text-start py-8">
+          <h1 className="text-5xl lg:text-6xl font-bold text-center lg:text-start py-8">
             {data.name}
           </h1>
           <div className="flex lg:pl-1 pt-2 justify-center lg:justify-start">
             <p>Created By: {data.owner.display_name}</p>
             <p className="pl-2"> - {data.tracks.total} Songs</p>
           </div>
-          <p className="py-6 lg:py-12 text-lg max-w-xl text-center lg:text-start">
+          <p className="py-6 lg:py-12 text-lg text-center lg:text-start">
             {data.description.replace(/<[^>]+>/g, "")}
           </p>
           <a
             rel="noreferrer noopener"
             target="_blank"
             href={` https://open.spotify.com/playlist/${data.id}`}
-            className="flex justify-center lg:justify-start text-lg max-w-xl text-center lg:text-start text-green-600 hover:underline"
+            className="flex justify-center lg:justify-start text-lg text-center lg:text-start text-green-600 hover:underline"
           >
             https://open.spotify.com/playlist/{data.id}
           </a>
@@ -208,6 +208,7 @@ const PlaylistResultData = ({ data }) => {
                 <div className="relative group pt-1">
                   <img
                     id="albumArt"
+                    alt={`${data.track.name} album art`}
                     loading="lazy"
                     onLoad={() =>
                       handleImageLoad(data.track.album.images[2].url)
