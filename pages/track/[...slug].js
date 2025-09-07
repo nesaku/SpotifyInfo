@@ -56,7 +56,7 @@ const Slug = () => {
       }
     };
 
-    if (slug) {
+    if (slug && authData != null) {
       fetchData();
     }
   }, [slug, authData]);
