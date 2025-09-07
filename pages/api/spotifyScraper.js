@@ -1,3 +1,4 @@
+// Deprecated
 const cheerio = require("cheerio");
 
 const spotifyScraper = async (req, res) => {

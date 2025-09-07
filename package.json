@@ -1,6 +1,6 @@
 {
   "name": "spotifyinfo",
-  "version": "3.2.0",
+  "version": "4.0.0",
   "description": "Get Info On A Spotify track",
   "private": true,
   "author": "Nesaku",
@@ -14,6 +14,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "next": "14.0.4",
+    "otpauth": "^9.4.1",
     "react": "^18",
     "react-dom": "^18"
   },

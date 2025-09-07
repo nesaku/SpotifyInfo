@@ -1,48 +1,37 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useEffect, useRef, useState } from "react";
 import Meta from "./Meta";
+import Link from "next/link";
 
-// Used "const ResultData = ({ scrapedData })" instead of "const ResultData = (props.scrapedData) for readability
-const ResultData = ({ scrapedData }) => {
+// Used "const ResultData = ({ trackData })" instead of "const ResultData = (props.scrapedData)" for readability
+const ResultData = ({ trackData }) => {
   const [isLoading, setIsLoading] = useState(true);
   const audioRef = useRef();
 
-  /*Convert Seconds to Minutes:Seconds Format */
-  function convertDuration(time) {
-    return (
-      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
-    );
+  /* Convert milliseconds to the Minutes:Seconds Format */
+  function convertDuration(ms) {
+    const totalSeconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
+
+  console.log(trackData);
 
   useEffect(() => {
     // Use the Media Session API
     if ("mediaSession" in navigator) {
       navigator.mediaSession.metadata = new MediaMetadata({
-        title: scrapedData.title,
-        artist: scrapedData.artist,
+        title: trackData.name,
+        artist: trackData.artists[0].name,
         artwork: [
-          /* {
-            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=128&h=128`,
-            sizes: "128x128",
-            type: "image/jpg",
-          },
           {
-            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=192&h=192`,
-            sizes: "192x192",
-            type: "image/jpg",
-          },
-          {
-            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=256&h=256`,
-            sizes: "256x256",
-            type: "image/jpg",
-          }, */
-          {
-            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=384&h=384`,
+            src: `https://wsrv.nl/?url=${trackData.album.images[0].url}&w=384&h=384`,
             sizes: "384x384",
             type: "image/jpg",
           },
           {
-            src: `https://wsrv.nl/?url=${scrapedData.cover}&w=512&h=512`,
+            src: `https://wsrv.nl/?url=${trackData.album.images[0].url}&w=512&h=512`,
             sizes: "512x512",
             type: "image/jpg",
           },
@@ -74,20 +63,27 @@ const ResultData = ({ scrapedData }) => {
         navigator.mediaSession.metadata = null;
       }
     };
-  }, [scrapedData]);
+  }, [trackData]);
 
   return (
     <>
-      <Meta title={scrapedData.title || undefined} />
-      {scrapedData.title && (
+      <Meta title={trackData.name || undefined} />
+      {trackData.name && (
         <div className="flex items-center flex-col text-gray-900 dark:text-gray-200">
           <div className="mt-10 md:mt-32 mb-20 text-center max-w-sm">
             <h2 className="font-bold text-4xl my-1 uppercase p-2 sm:p-0">
-              {scrapedData.title}
+              {trackData.name}
             </h2>
             <p className="mt-2">
               <span className="font-semibold">By:</span>{" "}
-              <span className="text-md">{scrapedData.artist}</span>
+              <span className="text-md">
+                <Link
+                  href={`/artist/${trackData.artists[0].id}`}
+                  className="text-md hover:underline hover:text-green-500"
+                >
+                  {trackData.artists[0].name}
+                </Link>
+              </span>
             </p>
             <div className="mt-10 mx-auto p-4 background-image: url(/cover-placeholder.svg)">
               <h1 className="hidden">Cover:</h1>
@@ -98,20 +94,20 @@ const ResultData = ({ scrapedData }) => {
                 )}
                 <picture className="w-full h-full">
                   <source
-                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
+                    srcSet={`https://wsrv.nl/?url=${trackData.album.images[0].url}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&output=webp&maxage=30d`}
                     type="image/webp"
                     className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl 
                       ${isLoading ? "hidden" : ""}`}
                   />
                   <source
-                    srcSet={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    srcSet={`https://wsrv.nl/?url=${trackData.album.images[0].url}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
                     type="image/jpeg"
                     className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl 
                       ${isLoading ? "hidden" : ""}`}
                   />
                   <img
-                    src={`https://wsrv.nl/?url=${scrapedData.cover}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
-                    alt={scrapedData.coverAltText}
+                    src={`https://wsrv.nl/?url=${trackData.album.images[0].url}&default=${process.env.NEXT_PUBLIC_HOST_URL}/cover-placeholder.svg&maxage=30d`}
+                    alt={trackData.name}
                     className={`rounded-2xl w-fill h-fill mx-auto shadow-2xl drop-shadow-xl transition-opacity duration-500 ease-in-out ${
                       isLoading ? "opacity-0" : "opacity-100"
                     }`}
@@ -126,15 +122,17 @@ const ResultData = ({ scrapedData }) => {
           <div className="flex flex-col items-center mt-0 xl:mb-40 text-center pb-10 xl:max-w-2xl">
             <h2 className="font-bold text-2xl mb-2 underline">Duration: </h2>
             <span className="text-md">
-              {convertDuration(scrapedData.duration)}
+              {convertDuration(trackData.duration_ms)}
             </span>
             <h2 className="font-bold text-2xl my-6 underline">Release Date:</h2>
-            <span className="max-w-lg text-md">{scrapedData.releaseDate}</span>
+            <span className="max-w-lg text-md">
+              {trackData.album.release_date}
+            </span>
             <h2 className="font-bold text-2xl my-6 underline">Preview</h2>
-            {scrapedData.previewURL !== undefined && (
+            {trackData.preview_url && (
               <audio controls ref={audioRef}>
                 <source
-                  src={`/api/audioProxy?audioURL=${scrapedData.previewURL}`}
+                  src={`/api/audioProxy?audioURL=${trackData.preview_url}`}
                   type="audio/mpeg"
                 />
                 Your browser does not support the audio element.
@@ -142,47 +140,39 @@ const ResultData = ({ scrapedData }) => {
             )}
             <h2 className="font-bold text-2xl my-6 underline">Track URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
-              <a target="_blank" rel="noreferrer" href={`${scrapedData.url}`}>
-                {scrapedData.url}
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={`${trackData.external_urls.spotify}`}
+              >
+                {trackData.external_urls.spotify}{" "}
               </a>
             </span>
-            {/* 
-            <h2 className="font-bold text-2xl my-6 underline">
-              Spotify App URL:
-            </h2>
+            <h2 className="font-bold text-2xl my-6 underline">Track URI:</h2>
+            <span className="max-w-lg text-md">
+              spotify:{trackData.id.replace("track/", "track:")}
+            </span>
+            <h2 className="font-bold text-2xl my-6 underline">Album Name:</h2>
+            <span className="w-80 sm:w-full text-md truncate">
+              {trackData.album.name}
+            </span>
+            <h2 className="font-bold text-2xl my-6 underline">Album URL:</h2>
             <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
               <a
                 target="_blank"
                 rel="noreferrer"
-                href={` spotify://${scrapedData.trackID}`}
+                href={`${trackData.album.external_urls.spotify}`}
               >
-                spotify://{scrapedData.trackID}
-              </a>
-            </span> 
-            */}
-            <h2 className="font-bold text-2xl my-6 underline">Track URI:</h2>
-            <span className="max-w-lg text-md">
-              spotify:{scrapedData.trackID.replace("track/", "track:")}
-            </span>
-            <h2 className="font-bold text-2xl my-6 underline">Album URL:</h2>
-            <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
-              <a target="_blank" rel="noreferrer" href={`${scrapedData.album}`}>
-                {scrapedData.album}
+                {trackData.album.external_urls.spotify}
               </a>
             </span>
             <h2 className="font-bold text-2xl my-6 underline">Album URI:</h2>
             <span className="max-w-lg text-md">
-              {scrapedData.album.replace(
+              {trackData.album.uri.replace(
                 "https://open.spotify.com/album/",
                 "spotify:album:"
               )}
             </span>
-            {/*   <h2 className="font-bold text-2xl my-6 underline">
-              Last Scraped:{" "}
-            </h2>
-            <span className="text-md mb-60">
-              <code>{scrapedData.lastScraped}</code>
-            </span> */}
           </div>
         </div>
       )}

@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - Sep 7, 2026
+
+### Changed
+
+- Change the access token fetching flow by adding TOTP
+- Centralize fetching data for all routes
+- Update the ResultData component to work with the new API data format
+- Update the default user agent
+- Deprecate the scraper
+
+### Fixed
+
+- Fix the playlist and track routes not working
+
 ## [3.2.0] - Dec 28, 2024
 
 ### Added
@@ -21,7 +35,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add album url and uri for track results - [Issue](https://github.com/nesaku/SpotifyInfo/issues/4)
 - Add a loading skeleton for the track cover image
-  s
 
 ### Changed
 

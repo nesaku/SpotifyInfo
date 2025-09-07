@@ -24,6 +24,27 @@ const GetData = async (req, res) => {
   }
 
   try {
+    if (req.body.type === "track") {
+      const response = await fetch(
+        `https://api.spotify.com/v1/tracks/${req.body.slug}`,
+        {
+          method: "GET",
+          headers: {
+            "content-type": "application/json",
+            Authorization: "Bearer " + req.body.auth.accessToken,
+            "User-Agent":
+              process.env.NEXT_PUBLIC_USER_AGENT ||
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+          },
+        }
+      );
+
+      if (!response.ok) throw new Error("Fetch request failed");
+      const data = await response.json();
+      res.statusCode = 200;
+      return res.json(data);
+    }
+
     if (req.body.type === "playlist") {
       const response = await fetch(
         `https://api.spotify.com/v1/playlists/${req.body.slug}?fields=${playlistFields}`,
@@ -34,7 +55,7 @@ const GetData = async (req, res) => {
             Authorization: "Bearer " + req.body.auth.accessToken,
             "User-Agent":
               process.env.NEXT_PUBLIC_USER_AGENT ||
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
           },
         }
       );
@@ -54,7 +75,7 @@ const GetData = async (req, res) => {
             Authorization: "Bearer " + req.body.auth.accessToken,
             "User-Agent":
               process.env.NEXT_PUBLIC_USER_AGENT ||
-              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36",
+              "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
           },
         }
       );

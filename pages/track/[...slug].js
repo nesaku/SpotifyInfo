@@ -3,17 +3,41 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Loader from "@/components/Loader";
 import ResultData from "@/components/ResultData";
+import useToken from "@/hooks/useToken";
 
 const Slug = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const [scrapedData, setScrapedData] = useState({});
+  const [fetchedData, setFetchedData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
 
+  const authData = useToken();
+  console.log(authData);
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch("/api/spotifyScraper", {
+      const res = await fetch(`/api/getData`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          type: "track",
+          slug: slug,
+          auth: authData,
+        }),
+      });
+      /*   const res = await fetch(`https://api.spotify.com/v1/tracks/${slug}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + "123",
+          "User-Agent":
+            process.env.NEXT_PUBLIC_USER_AGENT ||
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        },
+      }); */
+      /* const res = await fetch("https://api.spotify.com/v1/tracks/${slug}", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -21,10 +45,10 @@ const Slug = () => {
         body: JSON.stringify({
           queryURL: `https://open.spotify.com/track/${slug}`,
         }),
-      });
+      }); */
       if (res.ok) {
         const data = await res.json();
-        setScrapedData(data);
+        setFetchedData(data);
         setIsLoading(false);
       } else {
         setIsLoading(false);
@@ -35,7 +59,7 @@ const Slug = () => {
     if (slug) {
       fetchData();
     }
-  }, [slug]);
+  }, [slug, authData]);
 
   // Handle what to show based on the status of the API request
   return (
@@ -59,9 +83,7 @@ const Slug = () => {
       {!error && (
         <>
           {isLoading && <Loader />}
-          {!isLoading && scrapedData && (
-            <ResultData scrapedData={scrapedData} />
-          )}
+          {!isLoading && fetchedData && <ResultData trackData={fetchedData} />}
         </>
       )}
     </>
