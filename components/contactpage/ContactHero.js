@@ -11,7 +11,7 @@ const ContactHero = () => {
           <h2 className="mt-20 text-2xl">
             Have something to say? Please feel free to open an issue on{" "}
             <a
-              className="text-blue-600 dark:text-blue-500 underline"
+              className="text-green-600 dark:text-green-500 underline"
               href="https://github.com/nesaku/SpotifyInfo/issues"
               target="_blank"
               rel="noreferrer"
@@ -20,7 +20,7 @@ const ContactHero = () => {
             </a>{" "}
             /{" "}
             <a
-              className="text-blue-600 dark:text-blue-500 underline"
+              className="text-green-600 dark:text-green-500 underline"
               href="https://codeberg.org/nesaku/SpotifyInfo/issues"
               target="_blank"
               rel="noreferrer"

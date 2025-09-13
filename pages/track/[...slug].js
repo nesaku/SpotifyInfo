@@ -13,7 +13,6 @@ const Slug = () => {
   const [error, setError] = useState(false);
 
   const authData = useToken();
-  console.log(authData);
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetch(`/api/getData`, {

@@ -16,8 +16,6 @@ const ResultData = ({ trackData }) => {
     return `${minutes}:${seconds.toString().padStart(2, "0")}`;
   }
 
-  console.log(trackData);
-
   useEffect(() => {
     // Use the Media Session API
     if ("mediaSession" in navigator) {
@@ -70,10 +68,10 @@ const ResultData = ({ trackData }) => {
       <Meta title={trackData.name || undefined} />
       {trackData.name && (
         <div className="flex items-center flex-col text-gray-900 dark:text-gray-200">
-          <div className="mt-10 md:mt-32 mb-20 text-center max-w-sm">
-            <h2 className="font-bold text-4xl my-1 uppercase p-2 sm:p-0">
+          <div className="mt-10 mb-8 md:mt-32 text-center max-w-sm">
+            <h1 className="font-bold text-4xl my-1 uppercase p-2 sm:p-0">
               {trackData.name}
-            </h2>
+            </h1>
             <p className="mt-2">
               <span className="font-semibold">By:</span>{" "}
               <span className="text-md">
@@ -120,6 +118,18 @@ const ResultData = ({ trackData }) => {
           </div>
           <div id="divider" className="p-0 lg:p-2"></div>
           <div className="flex flex-col items-center mt-0 xl:mb-40 text-center pb-10 xl:max-w-2xl">
+            <div id="audioPreview" className="mb-6">
+              <h2 className="font-bold text-2xl mb-6 underline">Preview</h2>
+              {trackData.preview_url && (
+                <audio controls ref={audioRef}>
+                  <source
+                    src={`/api/audioProxy?audioURL=${trackData.preview_url}`}
+                    type="audio/mpeg"
+                  />
+                  Your browser does not support the audio element.
+                </audio>
+              )}
+            </div>
             <h2 className="font-bold text-2xl mb-2 underline">Duration: </h2>
             <span className="text-md">
               {convertDuration(trackData.duration_ms)}
@@ -128,18 +138,15 @@ const ResultData = ({ trackData }) => {
             <span className="max-w-lg text-md">
               {trackData.album.release_date}
             </span>
-            <h2 className="font-bold text-2xl my-6 underline">Preview</h2>
-            {trackData.preview_url && (
-              <audio controls ref={audioRef}>
-                <source
-                  src={`/api/audioProxy?audioURL=${trackData.preview_url}`}
-                  type="audio/mpeg"
-                />
-                Your browser does not support the audio element.
-              </audio>
-            )}
+
+            <h2 className="font-bold text-2xl my-6 underline">Album Name:</h2>
+            <span className="underline hover:text-green-500  w-80 sm:w-full text-md truncate">
+              <Link href={`/album/${trackData.album.id}`}>
+                {trackData.album.name}
+              </Link>
+            </span>
             <h2 className="font-bold text-2xl my-6 underline">Track URL:</h2>
-            <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
+            <span className="underline hover:text-green-500  w-80 sm:w-full text-md truncate">
               <a
                 target="_blank"
                 rel="noreferrer"
@@ -149,15 +156,11 @@ const ResultData = ({ trackData }) => {
               </a>
             </span>
             <h2 className="font-bold text-2xl my-6 underline">Track URI:</h2>
-            <span className="max-w-lg text-md">
-              spotify:{trackData.id.replace("track/", "track:")}
-            </span>
-            <h2 className="font-bold text-2xl my-6 underline">Album Name:</h2>
-            <span className="w-80 sm:w-full text-md truncate">
-              {trackData.album.name}
-            </span>
+            <span className="max-w-lg text-md">spotify:{trackData.id}</span>
+
+            {/* 
             <h2 className="font-bold text-2xl my-6 underline">Album URL:</h2>
-            <span className="underline text-blue-500  w-80 sm:w-full text-md truncate">
+            <span className="underline hover:text-green-500  w-80 sm:w-full text-md truncate">
               <a
                 target="_blank"
                 rel="noreferrer"
@@ -165,7 +168,7 @@ const ResultData = ({ trackData }) => {
               >
                 {trackData.album.external_urls.spotify}
               </a>
-            </span>
+            </span> */}
             <h2 className="font-bold text-2xl my-6 underline">Album URI:</h2>
             <span className="max-w-lg text-md">
               {trackData.album.uri.replace(
