@@ -134,17 +134,17 @@ const ResultData = ({ trackData }) => {
             <span className="text-md">
               {convertDuration(trackData.duration_ms)}
             </span>
-            <h2 className="font-bold text-2xl my-6 underline">Release Date:</h2>
-            <span className="max-w-lg text-md">
-              {trackData.album.release_date}
-            </span>
-
             <h2 className="font-bold text-2xl my-6 underline">Album Name:</h2>
             <span className="underline hover:text-green-500  w-80 sm:w-full text-md truncate">
               <Link href={`/album/${trackData.album.id}`}>
                 {trackData.album.name}
               </Link>
             </span>
+            <h2 className="font-bold text-2xl my-6 underline">Release Date:</h2>
+            <span className="max-w-lg text-md">
+              {trackData.album.release_date}
+            </span>
+
             <h2 className="font-bold text-2xl my-6 underline">Track URL:</h2>
             <span className="underline hover:text-green-500  w-80 sm:w-full text-md truncate">
               <a

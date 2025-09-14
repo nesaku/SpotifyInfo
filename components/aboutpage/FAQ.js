@@ -182,17 +182,16 @@ const FAQ = () => {
               >
                 privacy policy
               </Link>{" "}
-              for more info. If you still don&apos;t trust us, feel free to take
-              a look at our{" "}
+              for more info. We believe in transparency, feel free to take a
+              look at our{" "}
               <a
                 className="text-green-600 dark:text-green-500 underline"
                 href="https://github.com/nesaku/SpotifyInfo/issues"
                 target="_blank"
                 rel="noreferrer"
               >
-                source code
+                source code.
               </a>
-              .
             </p>
           </details>
           <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">
