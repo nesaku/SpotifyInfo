@@ -1,6 +1,6 @@
 {
   "name": "spotifyinfo",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "Get Info On A Spotify track",
   "private": true,
   "author": "Nesaku",
@@ -12,6 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "he": "^1.2.0",
     "next": "14.0.4",
     "otpauth": "^9.4.1",
     "react": "^18",

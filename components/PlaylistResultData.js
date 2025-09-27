@@ -1,9 +1,12 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import React, { useEffect, useRef, useState } from "react";
+import he from "he";
 import Meta from "./Meta";
 import Link from "next/link";
 
-const PlaylistResultData = ({ data }) => {
+
+const PlaylistResultData = ({ data, fetchNextPage, nextUrl }) => {
   const [currentAudio, setCurrentAudio] = useState([]);
   const [loadedImages, setLoadedImages] = useState({});
   const [isBottom, setIsBottom] = useState(false);
@@ -128,7 +131,7 @@ const PlaylistResultData = ({ data }) => {
             <p className="pl-2"> - {data.tracks.total} Songs</p>
           </div>
           <p className="py-6 lg:py-12 text-lg text-center lg:text-start">
-            {data.description.replace(/<[^>]+>/g, "")}
+            {he.decode(data.description.replace(/<[^>]+>/g, ""))}
           </p>
           <a
             rel="noreferrer noopener"
@@ -165,7 +168,7 @@ const PlaylistResultData = ({ data }) => {
         <div className="w-[95%] border-b-2 border-gray-700 rounded-full"></div>
       </div>
 
-      {/* TODO: Deal with playlists with more than 100 songs and performance */}
+      {/* TODO: Deal with playlists performance */}
       {data &&
         data.tracks.items.map((data, i) => (
           <div
@@ -308,7 +311,16 @@ const PlaylistResultData = ({ data }) => {
             </div>
           </div>
         ))}
-
+      {nextUrl && (
+        <div className="flex justify-center p-4">
+          <button
+            onClick={fetchNextPage}
+            className="bg-green-500 text-white font-bold py-2 px-4 rounded-full hover:bg-green-600 transition-colors duration-300"
+          >
+            Load More
+          </button>
+        </div>
+      )}
       {currentAudio.audioURL && (
         <div
           id="previewAudio"

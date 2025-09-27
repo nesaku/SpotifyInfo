@@ -9,22 +9,41 @@ const FormQuery = () => {
   const [inputValue, setInputValue] = useState("");
   const [validQuery, setValidQuery] = useState(true);
 
-  // Push the input value to the track slug
-  // TODO: Handle more Spotify URL/URI formats
+  const parse = (input) => {
+    input = decodeURIComponent(input.trim());
+
+    // Spotify URI (e.g. spotify:track:ID)
+    if (input.startsWith("spotify:")) {
+      const parts = input.split(":");
+      if (parts.length >= 3) {
+        return { type: parts[1], id: parts[2] };
+      }
+    }
+
+    // Embed URLs with ?uri=spotify:type:id
+    const uriMatch = input.match(/uri=spotify:([a-z]+):([A-Za-z0-9]+)/);
+    if (uriMatch) {
+      return { type: uriMatch[1], id: uriMatch[2] };
+    }
+
+    // Standard URLs: open, play, embed, with optional localization
+    const match = input.match(
+      /spotify\.com\/(?:embed\/)?(?:intl-\w{2}\/)?([a-z]+)\/([A-Za-z0-9]+)/
+    );
+    if (match) {
+      return { type: match[1], id: match[2] };
+    }
+
+    return {};
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      inputValue.startsWith("https://open.spotify.com") ||
-      inputValue.startsWith("http://open.spotify.com") ||
-      inputValue.startsWith("spotify:")
-    ) {
-      router.push(
-        inputValue
-          .replace("http://", "https://")
-          .replace("spotify://track/", "https://open.spotify.com/track/")
-          .replace("spotify:track:", "https://open.spotify.com/track/")
-          .replace("https://open.spotify.com/", " ")
-      );
+
+    const parsed = parse(inputValue);
+
+    if (parsed.type && parsed.id) {
+      router.push(`/${parsed.type}/${parsed.id}`);
     } else {
       setValidQuery(false);
     }

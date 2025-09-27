@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Loader from "@/components/Loader";
@@ -11,89 +11,68 @@ const Slug = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [nextUrl, setNextUrl] = useState(null);
 
   const authData = useToken();
 
-  const fields = `
-  description,
-  id,
-  uri,
-  type,
-  images,
-  name,
-  owner,
-  tracks(
-      items(
-          added_at,
-          track(!available_markets),
-          track(
-              album(!available_markets)
-          )
-      ),
-      next,
-      previous,
-      total
-  )`;
-
-  useEffect(() => {
-    setIsLoading(true);
-    // console.log("Started fetching data");
-
-    const fetchData = async () => {
+  const fetchData = useCallback(
+    async (url = null) => {
+      setIsLoading(true);
       const res = await fetch(`/api/getData`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({
-          type: "playlist",
-          slug: slug,
+          type: url ? "nextPage" : "playlist",
+          slug: url || slug,
           auth: authData,
         }),
       });
       if (res.ok) {
-        const data = await res.json();
-        setData(data);
-        setIsLoading(false);
-      } else {
-        setIsLoading(false);
-        setError(true);
-      }
-    };
+        const newData = await res.json();
 
-    /* Fetch the Spotify API directly
-    
-    const fetchData = async () => {
-      const res = await fetch(
-        `https://api.spotify.com/v1/playlists/${slug}?fields=${fields}`,
-        {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + authData.accessToken,
-            "content-type": "application/json",
-          },
+        // Check if the response is an initial vs nextPage fetch
+        if (newData.tracks) {
+          // Initial playlist fetch
+          setData(newData);
+          setNextUrl(newData.tracks.next);
+        } else {
+          // Use nextPage data to append the track data
+          setData((prevData) => ({
+            ...prevData,
+            tracks: {
+              ...prevData.tracks,
+              items: [...prevData.tracks.items, ...newData.items],
+              next: newData.next,
+              previous: newData.previous,
+            },
+          }));
+          setNextUrl(newData.next);
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        setData(data);
+
         setIsLoading(false);
-        // console.log("Successfully fetched data");
       } else {
         setIsLoading(false);
         setError(true);
-        // console.log("Failed to fetch data");
       }
-    }; 
-    */
+    },
+    [slug, authData]
+  );
 
+  useEffect(() => {
+    setIsLoading(true);
     if (slug && authData != null) {
       fetchData();
-      // console.log("Fetch function called");
     }
-  }, [slug, authData]);
+  }, [slug, authData, fetchData]);
 
-  // Handle what to show based on the status of the API request
+  const fetchNextPage = () => {
+    if (nextUrl) {
+      fetchData(nextUrl);
+    }
+  };
+
   return (
     <>
       {error && (
@@ -115,7 +94,13 @@ const Slug = () => {
       {!error && (
         <>
           {isLoading && <Loader />}
-          {!isLoading && data && <PlaylistResultData data={data} />}
+          {!isLoading && data && (
+            <PlaylistResultData
+              data={data}
+              fetchNextPage={fetchNextPage}
+              nextUrl={nextUrl}
+            />
+          )}
         </>
       )}
     </>

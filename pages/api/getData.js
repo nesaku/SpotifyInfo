@@ -56,6 +56,29 @@ const GetData = async (req, res) => {
       return res.json(data);
     }
 
+    // Handle nextPage requests
+    if (req.body.type === "nextPage") {
+      //The fields query parameter needs to be removed because it interferes with the API response
+      const url = new URL(req.body.slug);
+      url.searchParams.delete("fields");
+
+      const response = await fetch(url.href, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: "Bearer " + req.body.auth.accessToken,
+          "User-Agent":
+            process.env.NEXT_PUBLIC_USER_AGENT ||
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+        },
+      });
+
+      if (!response.ok) throw new Error("Fetch request failed");
+      const data = await response.json();
+      res.statusCode = 200;
+      return res.json(data);
+    }
+
     if (req.body.type === "album") {
       const response = await fetch(
         `https://api.spotify.com/v1/albums/${req.body.slug}?fields=${albumFields}`,

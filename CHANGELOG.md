@@ -5,7 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.1.0] - Sep 14, 2026
+## [4.2.0] - Sep 27, 2025
+
+### Added
+
+- Add a button to load more than 100 tracks if applicable
+
+### Changed
+
+- Improve Spotify URL/URI format parsing
+- Improve decoding HTML entities
+
+## [4.1.0] - Sep 14, 2025
 
 ### Added
 
@@ -17,7 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove references to scraping
 - Unify link colors
 
-## [4.0.0] - Sep 7, 2026
+## [4.0.0] - Sep 7, 2025
 
 ### Changed
 
