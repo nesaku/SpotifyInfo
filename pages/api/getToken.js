@@ -2,9 +2,9 @@ import { Secret, TOTP } from "otpauth";
 
 export default async function handler(req, res) {
   try {
-    // Get the latest TOTP secret using https://github.com/Thereallo1026/spotify-secrets
+    // Get the latest TOTP secret using https://git.gay/thereallo/totp-secrets
     const secretsRes = await fetch(
-      "https://raw.githubusercontent.com/Thereallo1026/spotify-secrets/refs/heads/main/secrets/secretBytes.json",
+      "https://git.gay/thereallo/totp-secrets/raw/branch/main/secrets/secretBytes.json",
       {
         headers: {
           "User-Agent":
