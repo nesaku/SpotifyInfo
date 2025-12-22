@@ -29,6 +29,7 @@ const GetData = async (req, res) => {
           },
         }
       );
+      console.log(response);
 
       if (!response.ok) throw new Error("Fetch request failed");
       const data = await response.json();

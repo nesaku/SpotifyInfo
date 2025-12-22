@@ -1,6 +1,6 @@
 {
   "name": "spotifyinfo",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "description": "Get Info On A Spotify track",
   "private": true,
   "author": "Nesaku",
@@ -9,20 +9,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "he": "^1.2.0",
-    "next": "14.0.4",
+    "next": "^16.1.1",
     "otpauth": "^9.4.1",
-    "react": "^18",
-    "react-dom": "^18"
-  },
-  "devDependencies": {
-    "autoprefixer": "^10.0.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "postcss": "^8",
-    "tailwindcss": "^3.3.0"
+    "postcss": "^8.5.6",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "tailwindcss": "^4.1.18"
   }
 }
