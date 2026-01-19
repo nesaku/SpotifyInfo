@@ -1,31 +1,36 @@
 const cheerio = require("cheerio");
 
 // Scrape preview URLs if the official API returns a null response
-async function getPreviewUrls(spotifyUrl) {
+async function getPreviewUrls(spotifyURI) {
   try {
-    const res = await fetch(spotifyUrl, {
+    const trackId = spotifyURI.split(":").pop();
+    const oEmbedUrl = `https://open.spotify.com/embed/track/${trackId}`;
+
+    const res = await fetch(oEmbedUrl, {
       headers: {
-        "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT
-          ? process.env.NEXT_PUBLIC_USER_AGENT
-          : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
+        "User-Agent":
+          process.env.NEXT_PUBLIC_USER_AGENT ||
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
       },
     });
 
     const html = await res.text();
     const $ = cheerio.load(html);
 
-    const links = new Set();
+    // Get the preview URL inside the __NEXT_DATA__ script
+    const script = $("#__NEXT_DATA__").html();
+    if (!script) return [];
 
-    $("*").each((i, el) => {
-      const attrs = el.attribs;
-      Object.values(attrs).forEach((value) => {
-        if (value && value.includes("p.scdn.co")) {
-          links.add(value);
-        }
-      });
-    });
+    const json = JSON.parse(script);
 
-    return Array.from(links);
+    const preview =
+      json?.props?.pageProps?.state?.data?.entity?.audioPreview?.url;
+
+    if (preview && preview.includes("p.scdn.co")) {
+      return [preview];
+    }
+
+    return [];
   } catch (err) {
     console.error("Scrape failed:", err.message);
     return [];
@@ -73,7 +78,7 @@ const GetData = async (req, res) => {
       if (data.preview_url) {
         previewUrls = [data.preview_url];
       } else {
-        previewUrls = await getPreviewUrls(data.external_urls.spotify);
+        previewUrls = await getPreviewUrls(data.uri);
       }
 
       res.statusCode = 200;
@@ -110,7 +115,7 @@ const GetData = async (req, res) => {
           if (track.preview_url) {
             previewUrls = [track.preview_url];
           } else {
-            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+            previewUrls = await getPreviewUrls(track.uri);
           }
 
           return {
@@ -176,7 +181,7 @@ const GetData = async (req, res) => {
           if (track.preview_url) {
             previewUrls = [track.preview_url];
           } else {
-            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+            previewUrls = await getPreviewUrls(track.uri);
           }
 
           return {
@@ -226,7 +231,7 @@ const GetData = async (req, res) => {
           if (track.preview_url) {
             previewUrls = [track.preview_url];
           } else {
-            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+            previewUrls = await getPreviewUrls(track.uri);
           }
 
           return {
