@@ -1,3 +1,37 @@
+const cheerio = require("cheerio");
+
+// Scrape preview URLs if the official API returns a null response
+async function getPreviewUrls(spotifyUrl) {
+  try {
+    const res = await fetch(spotifyUrl, {
+      headers: {
+        "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT
+          ? process.env.NEXT_PUBLIC_USER_AGENT
+          : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
+      },
+    });
+
+    const html = await res.text();
+    const $ = cheerio.load(html);
+
+    const links = new Set();
+
+    $("*").each((i, el) => {
+      const attrs = el.attribs;
+      Object.values(attrs).forEach((value) => {
+        if (value && value.includes("p.scdn.co")) {
+          links.add(value);
+        }
+      });
+    });
+
+    return Array.from(links);
+  } catch (err) {
+    console.error("Scrape failed:", err.message);
+    return [];
+  }
+}
+
 const GetData = async (req, res) => {
   const playlistFields =
     "description,id,uri,type,images,name,owner,tracks(items,next,previous,total)";
@@ -22,19 +56,32 @@ const GetData = async (req, res) => {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            Authorization: "Bearer " + req.body.auth.accessToken,
+            Authorization: "Bearer " + req.body.auth.access_token,
             "User-Agent":
               process.env.NEXT_PUBLIC_USER_AGENT ||
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
           },
-        }
+        },
       );
-      console.log(response);
+      // console.log(response);
 
       if (!response.ok) throw new Error("Fetch request failed");
       const data = await response.json();
+
+      let previewUrls = [];
+
+      if (data.preview_url) {
+        previewUrls = [data.preview_url];
+      } else {
+        previewUrls = await getPreviewUrls(data.external_urls.spotify);
+      }
+
       res.statusCode = 200;
-      return res.json(data);
+      return res.json({
+        ...data,
+        preview_urls: previewUrls,
+        preview_url: previewUrls[0] || null,
+      });
     }
 
     if (req.body.type === "playlist") {
@@ -44,22 +91,46 @@ const GetData = async (req, res) => {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            Authorization: "Bearer " + req.body.auth.accessToken,
+            Authorization: "Bearer " + req.body.auth.access_token,
             "User-Agent":
               process.env.NEXT_PUBLIC_USER_AGENT ||
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
           },
-        }
+        },
       );
       if (!response.ok) throw new Error("Fetch request failed");
       const data = await response.json();
+
+      data.tracks.items = await Promise.all(
+        data.tracks.items.map(async (item) => {
+          const track = item.track;
+
+          let previewUrls = [];
+
+          if (track.preview_url) {
+            previewUrls = [track.preview_url];
+          } else {
+            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+          }
+
+          return {
+            ...item,
+            track: {
+              ...track,
+              preview_urls: previewUrls,
+              preview_url: previewUrls[0] || null,
+            },
+          };
+        }),
+      );
+
       res.statusCode = 200;
       return res.json(data);
     }
 
     // Handle nextPage requests
     if (req.body.type === "nextPage") {
-      //The fields query parameter needs to be removed because it interferes with the API response
+      // The fields query parameter needs to be removed because it interferes with the API response
       const url = new URL(req.body.slug);
       url.searchParams.delete("fields");
 
@@ -67,7 +138,7 @@ const GetData = async (req, res) => {
         method: "GET",
         headers: {
           "content-type": "application/json",
-          Authorization: "Bearer " + req.body.auth.accessToken,
+          Authorization: "Bearer " + req.body.auth.access_token,
           "User-Agent":
             process.env.NEXT_PUBLIC_USER_AGENT ||
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
@@ -87,16 +158,35 @@ const GetData = async (req, res) => {
           method: "GET",
           headers: {
             "content-type": "application/json",
-            Authorization: "Bearer " + req.body.auth.accessToken,
+            Authorization: "Bearer " + req.body.auth.access_token,
             "User-Agent":
               process.env.NEXT_PUBLIC_USER_AGENT ||
               "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
           },
-        }
+        },
       );
 
       if (!response.ok) throw new Error("Fetch request failed");
       const data = await response.json();
+
+      data.tracks.items = await Promise.all(
+        data.tracks.items.map(async (track) => {
+          let previewUrls = [];
+
+          if (track.preview_url) {
+            previewUrls = [track.preview_url];
+          } else {
+            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+          }
+
+          return {
+            ...track,
+            preview_urls: previewUrls,
+            preview_url: previewUrls[0] || null,
+          };
+        }),
+      );
+
       res.statusCode = 200;
       return res.json(data);
     }
@@ -104,7 +194,7 @@ const GetData = async (req, res) => {
     if (req.body.type === "artist") {
       const headers = {
         "content-type": "application/json",
-        Authorization: "Bearer " + req.body.auth.accessToken,
+        Authorization: "Bearer " + req.body.auth.access_token,
         "User-Agent":
           process.env.NEXT_PUBLIC_USER_AGENT ||
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
@@ -117,7 +207,7 @@ const GetData = async (req, res) => {
         }),
         fetch(
           `https://api.spotify.com/v1/artists/${req.body.slug}/top-tracks?fields=${artistFields}`,
-          { method: "GET", headers }
+          { method: "GET", headers },
         ),
       ]);
 
@@ -128,6 +218,24 @@ const GetData = async (req, res) => {
         artistRes.json(),
         topTracksRes.json(),
       ]);
+
+      topTracksData.tracks = await Promise.all(
+        topTracksData.tracks.map(async (track) => {
+          let previewUrls = [];
+
+          if (track.preview_url) {
+            previewUrls = [track.preview_url];
+          } else {
+            previewUrls = await getPreviewUrls(track.external_urls.spotify);
+          }
+
+          return {
+            ...track,
+            preview_urls: previewUrls,
+            preview_url: previewUrls[0] || null,
+          };
+        }),
+      );
 
       res.statusCode = 200;
       return res.json({

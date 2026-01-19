@@ -26,25 +26,6 @@ const Slug = () => {
           auth: authData,
         }),
       });
-      /*   const res = await fetch(`https://api.spotify.com/v1/tracks/${slug}`, {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          Authorization: "Bearer " + "123",
-          "User-Agent":
-            process.env.NEXT_PUBLIC_USER_AGENT ||
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
-        },
-      }); */
-      /* const res = await fetch("https://api.spotify.com/v1/tracks/${slug}", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          queryURL: `https://open.spotify.com/track/${slug}`,
-        }),
-      }); */
       if (res.ok) {
         const data = await res.json();
         setFetchedData(data);
