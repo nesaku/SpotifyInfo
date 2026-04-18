@@ -135,6 +135,52 @@ const FAQ = () => {
           <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">
             <summary className="flex cursor-pointer items-center justify-between">
               <h2 className="font-semibold capitalize">
+                Why Is This Slower Than Spotify?
+              </h2>
+
+              <span className="relative ml-1.5 h-5 w-5 flex-shrink-0">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute inset-0 opacity-100 group-open:opacity-0"
+                  fill="white"
+                  viewBox="0 0 24 24"
+                  stroke="black"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="absolute inset-0 opacity-0 group-open:opacity-100"
+                  fill="white"
+                  viewBox="0 0 24 24"
+                  stroke="black"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+              </span>
+            </summary>
+
+            <p className="mt-4 mx-8 leading-relaxed text-gray-800 dark:text-gray-200">
+              When you make a request for a Spotify track on SpotifyInfo, your
+              request needs to be first scraped by the scraper from Spotify
+              before the result can be shown to you. This causes a delay from
+              when you make the request to when the result is shown.
+            </p>
+          </details>
+          <details className="group p-6 border-t-2 border-gray-400 dark:border-gray-400">
+            <summary className="flex cursor-pointer items-center justify-between">
+              <h2 className="font-semibold capitalize">
                 What Do You Do With My Data?
               </h2>
 

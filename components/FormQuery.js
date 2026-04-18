@@ -28,7 +28,7 @@ const FormQuery = () => {
 
     // Standard URLs: open, play, embed, with optional localization
     const match = input.match(
-      /spotify\.com\/(?:embed\/)?(?:intl-\w{2}\/)?([a-z]+)\/([A-Za-z0-9]+)/
+      /spotify\.com\/(?:embed\/)?(?:intl-\w{2}\/)?([a-z]+)\/([A-Za-z0-9]+)/,
     );
     if (match) {
       return { type: match[1], id: match[2] };
@@ -71,7 +71,7 @@ const FormQuery = () => {
                 className="rounded-md mx-10 py-3 px-5 text-left text-black text-sm  bg-slate-200 border-4 border-green-600 focus:outline-none focus:ring-4 focus:ring-green-300"
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                type="url"
+                type="text" // Also accept URIs
                 name="search"
                 aria-label="Search"
                 placeholder="https://open.spotify.com/track/3CRDbSIZ4r5MsZ0YwxuEkn"

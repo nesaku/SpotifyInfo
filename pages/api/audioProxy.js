@@ -22,7 +22,7 @@ const audioProxy = async (req, res) => {
       headers: new Headers({
         "User-Agent": process.env.NEXT_PUBLIC_USER_AGENT
           ? process.env.NEXT_PUBLIC_USER_AGENT
-          : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.3",
+          : "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36",
       }),
     });
 
